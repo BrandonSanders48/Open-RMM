@@ -17,7 +17,7 @@
 	$error = $json['WMI_Processes_error'];
 
 ?>
-<h4 style="color:<?php echo $siteSettings['theme']['Color 1'];?>">
+<h4 style="color:<?php echo $siteSettings['theme']['Color 1'];?>;">
 	Processes (<?php echo count($procs);?>)
 </h4>
 <?php if($showDate == "latest"){?>

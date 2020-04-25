@@ -8,7 +8,7 @@
 	include("../db.php");
 	//Delete all recieved commands
 	$query = "DELETE FROM commands WHERE status <> 'Sent'";
-	mysqli_query($db, $query);
+	mysqli_query($db, $query);
 	//Delete WMI data older than 15 days
 	$daysToKeep = $siteSettings['Max_History_Days'];
 	$date = date("m/d/Y", strtotime("-".$daysToKeep." days"));

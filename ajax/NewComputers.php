@@ -9,21 +9,21 @@
 <hr/>
 <div style="overflow:auto;width:100%">
 	<form method="post" action="index.php">
-		<table style="line-height:20px;overflow:hidden;font-size:14px;margin-top:8px" class="table table-striped table-hover">
-		 			  <col width="30">
-		 			  <col width="30">
-					  <col width="280">
-					  <col width="120">
-					  <col width="100">
-					  <col width="180">
-					  <col width="80">
-					  <col width="180">
-					  <col width="100">
-					  <col width="120">
-					  <col width="120">
+		<table style="line-height:20px;overflow:hidden;font-size:14px;margin-top:8px;" class="table table-striped table-hover">
+		  <col width="30">
+		  <col width="30">
+		  <col width="280">
+		  <col width="120">
+		  <col width="100">
+		  <col width="180">
+		  <col width="80">
+		  <col width="180">
+		  <col width="100">
+		  <col width="120">
+		  <col width="120">
 		  <thead class="thead-dark">
 				<tr>
-				  <th scope="col"><input onClick="toggle(this)" id="allcomputers"  value="<?php echo $result['ID']; ?>" style="display:inline;appearance:none" type="checkbox"></th>
+				  <th scope="col"><input onClick="toggle(this)" id="allcomputers" value="<?php echo $result['ID']; ?>" style="display:inline;appearance:none;" type="checkbox"></th>
 				  <th scope="col">ID</th>
 				  <th scope="col">Hostname</th>
 				  <th scope="col"></th>
@@ -52,16 +52,19 @@
 					$size = $data['WMI_LogicalDisk'][0]['Size'];
 					$used = $size - $freeSpace ;
 					$usedPct = round(($used/$size) * 100);
+					
 					//Determine Warning Level
 					if($usedPct > $siteSettings['Alert Settings']['Disk']['Danger'] ){
 						$pbColor = "red";
 					}elseif($usedPct > $siteSettings['Alert Settings']['Disk']['Warning']){
 						$pbColor = "#ffa500";
-					}else{ $pbColor = $siteSettings['theme']['Color 4']; }
+					}else{
+						$pbColor = $siteSettings['theme']['Color 4'];
+					}
 				?>
 				<tr>
 				  <td>
-					  <input id="computers" name="computers[]" value="<?php echo $result['ID']; ?>" style="display:inline;appearance:none" type="checkbox">
+					  <input id="computers" name="computers[]" value="<?php echo $result['ID']; ?>" style="display:inline;appearance:none;" type="checkbox">
 				  </td>
 				  <th scope="row">
 					<?php if($count==$limit - 10){?>
@@ -110,7 +113,7 @@
 				  </td>
 				  <td>
 					<div class="progress" style="background:<?php echo $siteSettings['theme']['Color 3']; ?>;" title="<?php echo $usedPct;?>%">
-						<div class="progress-bar" role="progressbar" style="background:<?php echo $pbColor;?>;width:<?php echo $usedPct;?>%" aria-valuenow="<?php echo $usedPct;?>" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar" role="progressbar" style="background:<?php echo $pbColor;?>;width:<?php echo $usedPct;?>%;" aria-valuenow="<?php echo $usedPct;?>" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 				  </td>
 				  <td><?php echo gmdate("m/d/y\ h:i",$result['date_added']); ?></td>
@@ -118,9 +121,11 @@
 			<?php }?>
 		   </tbody>
 		</table>
-		<button data-toggle="modal" type="button" data-target="#companyComputersModal" style="background:<?php echo $siteSettings['theme']['Color 1'];?>;color:#fff" class="btn btn-sm">
+		
+		<button data-toggle="modal" type="button" data-target="#companyComputersModal" style="background:<?php echo $siteSettings['theme']['Color 1'];?>;color:#fff;" class="btn btn-sm">
 			Add Selected To..
 		</button>
+		
 		<!------------- Add Company Computers ------------------->
 		<div id="companyComputersModal" class="modal fade" role="dialog">
 		  <div class="modal-dialog modal-sm">
@@ -135,18 +140,20 @@
 				$results = mysqli_query($db, $query);
 				$commandCount = mysqli_num_rows($results);
 				while($command = mysqli_fetch_assoc($results)){
-				$count++;
+					$count++;
 				?>
 				  <div class="form-check">
-					<input type="radio" name="companies" value="<?php echo $command['CompanyID']; ?>" class="form-check-input" id="CompanyCheck">
+					<input type="radio" name="companies" value="<?php echo $command['CompanyID']; ?>" class="form-check-input" id="CompanyCheck"/>
 					<label class="form-check-label" for="CompanyCheck"><?php echo $command['name']; ?></label>
 				  </div>
 				<?php } ?>
 			  </div>
 			  <div class="modal-footer">
-				<input type="hidden" name="type" value="CompanyComputers">
+				<input type="hidden" name="type" value="CompanyComputers"/>
 				<button type="button" class="btn btn-sm" data-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-sm" style="background:<?php echo $siteSettings['theme']['Color 2']; ?>;color:#fff;" d>Add To Company</button>
+				<button type="submit" class="btn btn-sm" style="background:<?php echo $siteSettings['theme']['Color 2']; ?>;color:#fff;">
+					Add To Company
+				</button>
 			  </div>
 			</div>
 		  </div>

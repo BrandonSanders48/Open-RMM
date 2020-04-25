@@ -17,7 +17,7 @@
 	$error = $json['WMI_Services_error'];
 
 ?>
-<h4 style="color:<?php echo $siteSettings['theme']['Color 1'];?>">
+<h4 style="color:<?php echo $siteSettings['theme']['Color 1'];?>;">
 	Services (<?php echo count($services);?>)
 </h4>
 <?php if($showDate == "latest"){?>

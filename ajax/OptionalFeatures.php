@@ -11,7 +11,6 @@
 	
 	if(!$exists){ exit("<br><center><h4>No Computer Selected</h4><p>To Select A Computer, Please Visit The <a class='text-dark' href='index.php'><u>Dashboard</u></a></p></center><hr>"); }
 
-	
 	$json = getComputerData($result['hostname'], array("WMI_OptionalFeatures"), $showDate);
 
 ?>
@@ -40,21 +39,21 @@
 <hr/>
 <div class="card card-sm">
 	<div class="card-body row no-gutters align-items-center">
-		<div style="margin-top:10px;padding-right:10px" class="col-auto">
+		<div style="margin-top:10px;padding-right:10px;" class="col-auto">
 			<i class="fas fa-search h5 text-body"></i>
 		</div>
 		<div class="col">
 			<input id="searchInputOptf" value="<?php echo $search; ?>" name="search" class="form-control form-control-md form-control-borderless" type="search" placeholder="Search By Feature Name">
 		</div>
 		<div class="col-auto">
-			<button class="btn btn-md" style="border-radius:0px 4px 4px 0px;background:<?php echo $siteSettings['theme']['Color 4']; ?>;color:#fff" type="button" onclick="search($('#searchInputOptf').val(),'OptionalFeatures','<?php echo $computerID; ?>');">
+			<button class="btn btn-md" style="border-radius:0px 4px 4px 0px;background:<?php echo $siteSettings['theme']['Color 4']; ?>;color:#fff;" type="button" onclick="search($('#searchInputOptf').val(),'OptionalFeatures','<?php echo $computerID; ?>');">
 				<i class="fas fa-search"></i>
 			</button>
 		</div>
 	</div>
 </div>
-<div style="overflow:auto;width:100%">
-	<table style="line-height:20px;overflow:hidden;font-size:14px;margin-top:8px" class="table table-striped">
+<div style="overflow:auto;width:100%;">
+	<table style="line-height:20px;overflow:hidden;font-size:14px;margin-top:8px;" class="table table-striped">
 	  <thead class="thead-dark">
 		<tr>
 		  <th scope="col">#</th>

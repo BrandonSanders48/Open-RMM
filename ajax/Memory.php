@@ -37,7 +37,6 @@
 
 <hr/>
 <div class="row">
-
 	<div class="col-md-3" style="padding:5px;">
 		<div class="card" style="height:100%;text-align:center;">
 		  <div class="card-body">				
@@ -51,9 +50,9 @@
 		  </div>
 		</div>
 	</div>
-	</div><br><hr><br>
-	<div class="row">
-
+</div>
+<br><hr><br>
+<div class="row">
 	<?php
 		$slots = $json['WMI_PhysicalMemory'];
 		$error = $json['WMI_PhysicalMemory_error'];

@@ -69,7 +69,7 @@ if($_SESSION['userid']!=""){
 		  </div>
 		  <div style="padding:5px;margin-top:20%;margin-bottom:100px;" class="main col-xs-8 col-sm-8 col-md-8 col-lg-8">
 			 <div >
-				<div class=" col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
+				<div class=" col-xs-6 col-sm-6 col-md-6 col-lg-6">
 				<div style="margin-top:-100px;padding-bottom:50px;">
 					<h2>Open-RMM</h2>
 					<p>Login From Here To Access Our Remote Monitoring & Management Platform. <?php echo $message; ?></p>
@@ -83,7 +83,7 @@ if($_SESSION['userid']!=""){
 						<label for="inputPassword"><b>Password:</b></label>
 						<input maxlength="25" minlength="4" type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
 					  </div><br>
-					  <button style="background:<?php echo $siteSettings['theme']['Color 2']; ?>;color:#fff" class="btn btn-lg btn-block text-uppercase" type="submit">
+					  <button style="background:<?php echo $siteSettings['theme']['Color 2']; ?>;color:#fff;" class="btn btn-lg btn-block text-uppercase" type="submit">
 						<i class="fas fa-sign-in-alt"></i> Sign in
 					  </button>
 					</form>

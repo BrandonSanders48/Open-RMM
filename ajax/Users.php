@@ -13,7 +13,7 @@
 	$json = getComputerData($result['hostname'], array("WMI_UserAccount"), $showDate);
 
 ?>
-<h4 style="color:<?php echo $siteSettings['theme']['Color 1'];?>">
+<h4 style="color:<?php echo $siteSettings['theme']['Color 1'];?>;">
 	User Accounts (<?php echo count($json['WMI_UserAccount']);?>)
 </h4>
 <?php if($showDate == "latest"){?>
@@ -86,8 +86,8 @@
 				</table>
 			</div>
 		</div>
-	<?php }
-		if(count($users) == 0){ ?>
+	<?php } ?>
+	<?php if(count($users) == 0){ ?>
 			<div class="col-md-12" style="padding:5px;">
 				<center><h5>No Users found.</h5></center>
 			</div>

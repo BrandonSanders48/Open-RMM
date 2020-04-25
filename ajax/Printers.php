@@ -15,7 +15,7 @@
 	$printers = $json['WMI_Printers'];
 	$error = $json['WMI_Printers_error'];
 ?>
-<h4 style="color:<?php echo $siteSettings['theme']['Color 1'];?>">
+<h4 style="color:<?php echo $siteSettings['theme']['Color 1'];?>;">
 	Printers (<?php echo count($printers);?>)
 </h4>
 <?php if($showDate == "latest"){?>
@@ -38,8 +38,8 @@
 </div>
 
 <hr/>
-<div style="overflow:auto;width:100%">
-	<table style="line-height:20px;overflow:hidden;font-size:14px;margin-top:8px" class="table table-striped table-hover">
+<div style="overflow:auto;width:100%;">
+	<table style="line-height:20px;overflow:hidden;font-size:14px;margin-top:8px;" class="table table-striped table-hover">
 	  <thead class="thead-dark">
 		<tr>
 		  <th scope="col">#</th>

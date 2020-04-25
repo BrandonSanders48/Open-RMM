@@ -16,7 +16,7 @@
 	$programs = $json['WMI_Product'];
 	$error = $json['WMI_Product_error'];
 ?>
-<h4 style="color:<?php echo $siteSettings['theme']['Color 1'];?>">
+<h4 style="color:<?php echo $siteSettings['theme']['Color 1'];?>;">
 	Installed Programs (<?php echo count($programs);?>)
 </h4>
 <?php if($showDate == "latest"){?>
@@ -55,7 +55,7 @@
 	</div>
 </div>
  <div style="overflow:auto;width:100%;">
-	<table style="line-height:20px;overflow:hidden;font-size:14px;margin-top:8px" class="table table-striped table-hover">
+	<table style="line-height:20px;overflow:hidden;font-size:14px;margin-top:8px;" class="table table-striped table-hover">
 		 <col width="20">
 		 <col width="250">
 		 <col width="200">

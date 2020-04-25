@@ -1,10 +1,9 @@
 <?php
+	//Load Config
 	include("config.php");
 	$siteSettings = json_decode($siteSettingsJson, true);
-###########################################################################################################################################
-######################################################## DEV ONLY DO NOT PASS #############################################################
-###########################################################################################################################################
-	//Set Timezone
+	
+	//Set Timezone, need to add this to config.
 	date_default_timezone_set("America/Chicago");
 	$serverPages = array("cron.php", "LoadHistorical.php");
 	
