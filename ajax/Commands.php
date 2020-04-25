@@ -1,5 +1,6 @@
 <?php
 	include("../Includes/db.php");
+	
 	$computerID = (int)$_GET['ID'];
 	
 	$query = "SELECT ID, hostname FROM computerdata WHERE ID='".$computerID."' LIMIT 1";

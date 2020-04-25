@@ -15,12 +15,12 @@
 		}
 	}
 ?>
-<h4 style="color:<?php echo $siteSettings['theme']['Color 1']; ?>">Site Settings</h4>
+<h4 style="color:<?php echo $siteSettings['theme']['Color 1']; ?>;">Site Settings</h4>
 <hr>
 <div style="width:100%;background:#fff;padding:15px;">
 	<form method="POST" action="index.php">
 		<input type="hidden" name="type" value="saveSiteSettings"/>
-		<textarea name="settings" id="siteSettingsTextArea" style="max-width:600px;width:100%;min-height:800px;"><?php echo $text;  ?></textarea>		
+		<textarea name="settings" id="siteSettingsTextArea" style="max-width:600px;width:100%;min-height:800px;"><?php echo $text; ?></textarea>		
 		<div style="margin-top:30px;" class="form-group float-label-control">                 
 			<input style="background:<?php echo $siteSettings['theme']['Color 4']; ?>;color:#fff;" type="submit" class="form-control" value="Save Details"/>
 		</div>
@@ -37,7 +37,6 @@
 		});	
 		return retdata;
 	}
-	
 	function prettyJson(json) {
 		var ugly = json
 		var obj = JSON.parse(ugly);

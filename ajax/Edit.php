@@ -1,6 +1,7 @@
 <?php
 	include("../Includes/db.php");
-	$computerID = (int)clean($_GET['ID']);
+	
+	$computerID = (int)$_GET['ID'];
 	$query = "SELECT ID, show_alerts, teamviewer,hostname, CompanyID, phone, email, name, comment,computerType FROM computerdata WHERE ID='".$computerID."' LIMIT 1";
 	$results = mysqli_query($db, $query);
 	$data = mysqli_fetch_assoc($results);

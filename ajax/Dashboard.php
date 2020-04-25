@@ -1,6 +1,7 @@
 <?php
 	include("../Includes/db.php");
-	$limit = intval($_GET['limit']);
+	
+	$limit = (int)$_GET['limit'];
 	if($limit == 0){
 		$limit = 20;
 	}
@@ -32,11 +33,15 @@
 					<a href="#" title="Refresh" onclick="loadSection('Dashboard');" class="btn btn-sm" style="float:right;color:#fff;background:<?php echo $siteSettings['theme']['Color 1'];?>;margin-left:5px;">
 						<i class="fas fa-sync"></i>
 					</a>
-					<a href="../../download/" style="display:inline;float:right;background:<?php echo $siteSettings['theme']['Color 4'];?>;color:#fff;" class="btn btn-sm"><i class="fas fa-download"></i> Download Agent</a>&nbsp;
-					<a href="#"  data-toggle="modal" data-target="#agentUpload" style="margin-right:5px;display:inline;float:right;background:<?php echo $siteSettings['theme']['Color 5'];?>;color:#fff;" class="btn btn-sm"><i class="fas fa-upload"></i> Upload Agent</a>
+					<a href="../../download/" style="display:inline;float:right;background:<?php echo $siteSettings['theme']['Color 4'];?>;color:#fff;" class="btn btn-sm">
+						<i class="fas fa-download"></i> Download Agent
+					</a>&nbsp;
+					<a href="#" data-toggle="modal" data-target="#agentUpload" style="margin-right:5px;display:inline;float:right;background:<?php echo $siteSettings['theme']['Color 5'];?>;color:#fff;" class="btn btn-sm">
+						<i class="fas fa-upload"></i> Upload Agent
+					</a>
 				</div>
 			   <div style="margin-top:5px;padding:15px;margin-bottom:8px;" class="card card-sm">
-					<div style="padding:5px" class="input-group">
+					<div style="padding:5px;" class="input-group">
 					  <div class="custom-file group-inline search-field-dashboard">
 						<input id="searchInput" value="<?php echo $search; ?>" name="search" class="form-control form-control-md form-control-borderless" type="text" style="min-width:100px;" placeholder="Search By Hostname, Company Or Client Name"/>
 						<button class="btn btn-md" id="search" style="margin-left:-4px;border-radius:0px 4px 4px 0px;background:<?php echo $siteSettings['theme']['Color 4']; ?>;color:#fff;" type="button" onclick="search($('#searchInput').val(), 'Dashboard', '', $('#filterInput').val());">
@@ -44,7 +49,8 @@
 						</button>
 					  </div>
 					  <div class="input-group-append search-field-dashboard">
-						&nbsp;<input id="filterInput" data-role="tagsinput" value="<?php echo $filters; ?>" name="filters" class="form-control form-control-md form-control-borderless" type="text" placeholder="Selected Filters"/>
+						&nbsp;
+						<input id="filterInput" data-role="tagsinput" value="<?php echo $filters; ?>" name="filters" class="form-control form-control-md form-control-borderless" type="text" placeholder="Selected Filters"/>
 						<button class="btn btn-md" style="margin-left:-4px;border-radius:0px 4px 4px 0px;background:<?php echo $siteSettings['theme']['Color 1']; ?>;color:#fff;" type="button" data-toggle="modal" data-target="#searchFilterModal">
 							<i class="fas fa-cog"></i>
 						</button>
@@ -71,7 +77,7 @@
 						  </th>
 						  <th scope="col">#</th>
 						  <th scope="col">Hostname</th>
-						  <th style="height:2px" scope="col"></th>
+						  <th style="height:2px;" scope="col"></th>
 						  <th scope="col">Logged In</th>
 						  <th scope="col">Windows Version</th>
 						  <th scope="col">Arch</th>
@@ -127,6 +133,7 @@
 										}
 									}
 								}
+								
 								//Determine Warning Level
 								$freeSpace = $data['WMI_LogicalDisk'][0]['FreeSpace'];
 								$size = $data['WMI_LogicalDisk'][0]['Size'];
@@ -181,7 +188,7 @@
 											<?php echo $alertCount;?>
 										</span>
 									<?php }else{?>
-										<span class="" data-toggle="modal" data-target="#computerAlerts" style="cursor:pointer;" onclick="computerAlertsModal('<?php echo strtoupper($result['hostname']);?>');">
+										<span data-toggle="modal" data-target="#computerAlerts" style="cursor:pointer;" onclick="computerAlertsModal('<?php echo strtoupper($result['hostname']);?>');">
 											<i class="text-success fas fa-circle"></i> 
 										</span>
 									<?php } ?>
@@ -204,14 +211,14 @@
 							  </td>
 							  <td>
 								<div class="progress" style="margin-top:5px;height:10px;background:<?php echo $siteSettings['theme']['Color 3']; ?>;" title="<?php echo $usedPct;?>%">
-									<div class="progress-bar" role="progressbar" style=";background:<?php echo $pbColor;?>;width:<?php echo $usedPct;?>%" aria-valuenow="<?php echo $usedPct;?>" aria-valuemin="0" aria-valuemax="100"></div>
+									<div class="progress-bar" role="progressbar" style=";background:<?php echo $pbColor;?>;width:<?php echo $usedPct;?>%;" aria-valuenow="<?php echo $usedPct;?>" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							  </td>
 							  <td>
 								<a href="#" onclick="loadSection('Edit', '<?php echo $result['ID']; ?>');" title="Edit Client" style="margin-top:-2px;padding:5px;padding-top:2px;padding-bottom:2px;border:none;" class="form-inline btn btn-dark btn-sm">
 									<i class="fas fa-pencil-alt"></i>
 								</a>
-								<a title="View Client" style="margin-top:-2px;padding:5px;padding-top:2px;padding-bottom:2px;border:none;background:<?php echo $siteSettings['theme']['Color 4'];?>" onclick="loadSection('General', '<?php echo $result['ID']; ?>');" href="#" class="form-inline btn btn-primary btn-sm">
+								<a title="View Client" style="margin-top:-2px;padding:5px;padding-top:2px;padding-bottom:2px;border:none;background:<?php echo $siteSettings['theme']['Color 4'];?>;" onclick="loadSection('General', '<?php echo $result['ID']; ?>');" href="#" class="form-inline btn btn-primary btn-sm">
 									<i class="fas fa-eye"></i>
 								</a>
 							  </td>
@@ -229,7 +236,7 @@
 					  </tbody>
 					</table>
 				</div>
-				<button data-toggle="modal" type="button" data-target="#companyComputersModal2" style="background:<?php echo $siteSettings['theme']['Color 1'];?>;color:#fff" class="btn btn-sm">
+				<button data-toggle="modal" type="button" data-target="#companyComputersModal2" style="background:<?php echo $siteSettings['theme']['Color 1'];?>;color:#fff;" class="btn btn-sm">
 					Add Selected To..
 				</button>
 				<button onclick="printData();" title="Export As CSV File" class="btn btn-sm" style="float:left;color:#fff;background:<?php echo $siteSettings['theme']['Color 1'];?>;margin-right:5px;">
@@ -260,7 +267,7 @@
 					  <div class="modal-footer">
 						<input type="hidden" name="type" value="CompanyComputers">
 						<button type="button" class="btn btn-sm" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-sm" style="background:<?php echo $siteSettings['theme']['Color 2']; ?>;color:#fff;">Add</button>
+						<button type="submit" class="btn btn-sm" style="background:<?php echo $siteSettings['theme']['Color 2'];?>;color:#fff;">Add</button>
 					  </div>
 					</div>
 				  </div>

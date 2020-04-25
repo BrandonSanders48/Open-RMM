@@ -309,12 +309,14 @@
 	$query = "SELECT CompanyID FROM companies where active='1'";
 	$results = mysqli_query($db, $query);
 	$companyCount = mysqli_num_rows($results);
-
+	
+	//Get active user count
 	$query = "SELECT ID FROM users where active='1'";
 	$results = mysqli_query($db, $query);
 	$userCount = mysqli_num_rows($results);
-
-	$query = "SELECT ID,teamviewer FROM computerdata where active='1'";
+	
+	//Get active computer count
+	$query = "SELECT ID FROM computerdata where active='1'";
 	$results = mysqli_query($db, $query);
 	$resultCount = mysqli_num_rows($results);
 ?>
@@ -340,7 +342,7 @@
 		<link rel="stylesheet" href="css/custom.css"/>
 		<style>
 			a { color:#003366; }
-			.calert { margin-left:5px;font-size:12px;width:46%;margin-right:5px;float:left;min-height:60px }
+			.calert { margin-left:5px;font-size:12px;width:46%;margin-right:5px;float:left;min-height:60px; }
 			@media screen and (max-width: 850px) {
 				.calert { height: 120px; }
 				.headall { display: none; }
@@ -358,7 +360,7 @@
 						<i class="fas fa-cog"></i>
 					</button>
 				</div>
-				<div style="float:right">
+				<div style="float:right;">
 					<button type="button" style="background:#e6e7e8;border:2px solid #e6e7e8;" data-toggle="modal" data-target="#alertModal" class="btn-sm btn btn-light" title="Configure Alerts">
 						&nbsp;<i class="fas fa-bell"></i>&nbsp;
 					</button>
@@ -431,12 +433,13 @@
 						</li>
 					</a>
 					<hr>
-					<div class="recents" id="recents" style="margin-top:20px;"></div>
+					<div class="recents" id="recents" style="margin-top:20px;"><!-- Load for ajax/recents.php --></div>
 					<div style="margin-top:20px;text-align:center;" class="notes">
-							<h6><b>Notes</b>
-							<button data-toggle="modal" data-target="#noteModal" title="Create New Note" style="float:right;margin-top:-5px;" class="btn btn-sm">
-								<i class="fas fa-edit"></i>
-							</button>
+							<h6>
+								<b>Notes</b>
+								<button data-toggle="modal" data-target="#noteModal" title="Create New Note" style="float:right;margin-top:-5px;" class="btn btn-sm">
+									<i class="fas fa-edit"></i>
+								</button>
 							</h6>
 							<?php
 							$count = 0;
@@ -529,7 +532,7 @@
 			  <form method="POST">
 				  <input type="hidden" name="type" value="AlertSettings"/>
 				  <div class="modal-body">
-					<p>Get Notified When Computers Go Offline, Have Low Memory And More.</p>
+					<p>Get notified when computers go offline, have low memory and more.</p>
 					<div class="row">
 						<div class="col-sm-6" style="padding:5px;">
 							<?php
@@ -686,7 +689,7 @@
 			  </div>
 			  <form id="note" method="POST">
 				  <div class="modal-body">
-					<p>This Will Create A New Note That Only You Can See.</p>
+					<p>This will create a new note that only you can see.</p>
 					<textarea required maxlength="300" name="note" class="form-control"></textarea>
 				  </div>
 				  <div class="modal-footer">
@@ -711,7 +714,7 @@
 				  <input type="hidden" name="type" value="AddEditCompany"/>
 				  <input type="hidden" name="ID" value="" id="editCompanyModal_ID"/>
 				  <div class="modal-body">
-					<p>This Will Add Company Information. To Better Assist And Organize Content.</p>
+					<p>This will add company information to better assist and organize content.</p>
 					<div class="form-group">
 						<input placeholder="Name" type="text" name="name" class="form-control" id="editCompanyModal_name"/>
 					</div>
@@ -771,7 +774,7 @@
 				<h6 id="computerAlertsHostname"><b>Confirm Action</b></h6>
 			  </div>
 			  <div class="modal-body">
-				<p>Are You Sure You Would Like To Complete This Action></p>
+				<p>Are you sure you would like to complete this action?</p>
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-sm" style="background:<?php echo $siteSettings['theme']['Color 4']; ?>;color:#fff;" data-dismiss="modal">
@@ -808,7 +811,7 @@
 			<div class="modal-content">
 			  <div class="modal-header">
 				<h5 class="modal-title" id="pageAlert_title">Message From Webpage</h5>
-				<h6 id="pageAlert_title"><b>Message From Webpage</b></h6>
+				<h6 id="pageAlert_title"><b>Message from webpage</b></h6>
 			  </div>
 			  <div class="modal-body">
 				<div id="pageAlert_message" class="alert">No Message</div>
@@ -887,7 +890,7 @@
 				<h5 class="modal-title">Actions</h5>
 			  </div>
 			  <div class="modal-body">
-				<p>This Will Send A Command To The Selected Client</p>
+				<p>This will send a command to the selected client</p>
 				<hr>
 				<button class="btn btn-sm" data-dismiss="modal" type="button" style="margin:5px;color:#fff;background:<?php echo $siteSettings['theme']['Color 1'];?>;width:47%;border:none;" data-toggle="modal" data-target="#terminalModal">
 					<i class="fas fa-terminal" style="margin-top:3px;float:left;"></i> Terminal

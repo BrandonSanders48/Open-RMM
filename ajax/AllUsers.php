@@ -24,7 +24,6 @@
 	 <col width="80">
 	 <col width="100">
 	 <thead class="thead-dark">
-
 		<tr>
 		  <th scope="col">ID</th>
 		  <th scope="col">Name</th>
@@ -38,6 +37,7 @@
 	  <tbody>
 		<?php
 			//Fetch Results
+			$count = 0;
 			while($user = mysqli_fetch_assoc($results)){
 				$count++;
 				if($user['active']=="1"){
@@ -48,12 +48,12 @@
 			?>
 			<tr>
 			  <td><b><?php echo $user['ID'];?></b></td>
-				<td><b><?php echo ucwords($user['nicename']);?></b></td>
-				 <td><a href="mailto:<?php echo strtolower(crypto('decrypt', $user['email'], $user['hex']));?>"><?php echo textOnNull(strtolower(crypto('decrypt', $user['email'], $user['hex'])),"No Email");?></a></td>
+			  <td><b><?php echo ucwords($user['nicename']);?></b></td>
+			  <td><a href="mailto:<?php echo strtolower(crypto('decrypt', $user['email'], $user['hex']));?>"><?php echo textOnNull(strtolower(crypto('decrypt', $user['email'], $user['hex'])),"No Email");?></a></td>
 			  <td><?php echo strtolower($user['username']);?></td>
 			  <td><?php echo textOnNull(gmdate("m/d/Y\ h:i A", $user['last_login']),"Never");?></td>
 			  <td><?php echo $status;?></td>
-			   <td>
+			  <td>
 				   <form action="index.php" method="POST">
 						<input type="hidden" name="type" value="DeleteUser"/>
 						<input type="hidden" name="ID" value="<?php echo $user['ID']; ?>"/>
@@ -75,6 +75,11 @@
 						</a>
 					</form>
 				</td>
+			</tr>
+		<?php }?>
+		<?php if($count == 0){?>
+			<tr>
+				<td colspan="7"><center>No users</center></td>
 			</tr>
 		<?php }?>
 	   </tbody>

@@ -96,9 +96,9 @@ if($_SESSION['userid']!=""){
 		  </div>
 		 </div>
 		  <footer style="z-index:999;padding:5px;height:30px;position:fixed;left:0;bottom:0;width:100%;color:#fff;text-align:center;background:<?php echo $siteSettings['theme']['Color 1'];?>;" class="page-footer font-small black">
-				<div class="footer-copyright text-center ">© <?php echo date('Y');?> Copyright
-					<a style="color:#fff;" href="#"> Open-RMM</a>
-				</div>
+			<div class="footer-copyright text-center ">© <?php echo date('Y');?> Copyright
+				<a style="color:#fff;" href="#"> Open-RMM</a>
+			</div>
 		  </footer>
 	</body>
 </html>

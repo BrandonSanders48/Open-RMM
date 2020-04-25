@@ -1,5 +1,6 @@
 <?php
 	include("../Includes/db.php");
+	
 	$computerID = (int)$_GET['ID'];
 	$showDate = $_GET['Date'];
 	

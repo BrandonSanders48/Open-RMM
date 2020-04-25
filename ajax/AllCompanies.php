@@ -11,7 +11,7 @@
 	<a href="#" title="Refresh" onclick="loadSection('AllCompanies');" class="btn btn-sm" style="margin:5px;color:#fff;background:<?php echo $siteSettings['theme']['Color 1'];?>;">
 		<i class="fas fa-sync"></i>
 	</a>
-	<button type="button" style="margin:5px;background:<?php echo $siteSettings['theme']['Color 1'];?>;color:#fff" data-toggle="modal" data-target="#companyModal" class="btn-sm btn btn-light" title="Add User">
+	<button type="button" style="margin:5px;background:<?php echo $siteSettings['theme']['Color 1'];?>;color:#fff;" data-toggle="modal" data-target="#companyModal" class="btn-sm btn btn-light" title="Add User">
 		<i class="fas fa-plus"></i> Add Company 
 	</button>
 </div>	
@@ -96,7 +96,7 @@
 				<?php echo textOnNull(ucfirst($company['comments']), "No Comments");?>
 			  </td>
 			   <td>
-				   <form action="index.php" style="display:inline" method="POST">
+				   <form action="index.php" style="display:inline;" method="POST">
 						<input type="hidden" name="type" value="DeleteCompany"/>
 						<input type="hidden" name="ID" value="<?php echo $company['CompanyID'];?>"/>
 						<?php if($company['active']=="1"){ ?>
@@ -144,6 +144,7 @@
 		$("#editCompanyModal_email").val(email);
 		$("#editCompanyModal_comments").val(comments);
 	}
+	
 	function searchItem(text, page="Dashboard", ID=0, filters="", limit=25){
 		$(".loadSection").html("<center><h3 style='margin-top:40px;'><i class='fas fa-spinner fa-spin'></i> Loading "+text+"</h3></center>");
 		$(".loadSection").load("ajax/"+page+".php?limit="+limit+"&search="+encodeURI(text)+"&ID="+ID+"&filters="+encodeURI(filters));
