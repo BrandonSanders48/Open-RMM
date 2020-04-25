@@ -13,7 +13,7 @@
 	$json = getComputerData($result['hostname'], array("WMI_USBHub", "WMI_DesktopMonitor", "WMI_Keyboard", "WMI_PointingDevice", "WMI_SoundDevice", "WMI_SerialPort", "WMI_PnPEntity"), $showDate);
 
 ?>
-<h4 style="color:<?php echo $siteSettings['theme']['Color 1'];?>">
+<h4 style="color:<?php echo $siteSettings['theme']['Color 1'];?>;">
 	Attached Devices
 </h4>
 <?php if($showDate == "latest"){?>
@@ -44,12 +44,12 @@
 			foreach($monitors as $device){		
 		?>
 			<div class="col-md-2" style="padding:5px;">
-				<div class="card" style="height:100%;padding:5px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff">
+				<div class="card" style="height:100%;padding:5px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff;">
 				  <div style="text-align:center;color:#fff;">
 					<h6 class="card-title">
 						<?php echo $device['Name'];?>
 					</h6>
-					<!--<p><?php echo $device['Description'];?></p> They All Seem To mAtch Name-->
+					<!--<p><?php echo $device['Description'];?></p> They all seem to match name -->
 				  </div>
 				</div>
 			</div>
@@ -69,7 +69,7 @@
 			foreach($hubs as $hub){	
 		?>
 			<div class="col-md-2" style="padding:3px;">
-				<div class="card" style="height:100%;padding:5px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff;font-size:14px">
+				<div class="card" style="height:100%;padding:5px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff;font-size:14px;">
 				  <div style="text-align:center;">
 					<h6 class="card-title">
 						<?php echo $hub['Name'];?>
@@ -93,7 +93,7 @@
 			foreach($keyboards as $device){	
 		?>
 			<div class="col-md-3" style="padding:5px;">
-				<div class="card" style="height:100%;padding:5px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff">
+				<div class="card" style="height:100%;padding:5px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff;">
 				  <div style="text-align:center;">
 					<h6 class="card-title">
 						<b><?php echo $device['Caption'];?></b>
@@ -119,12 +119,12 @@
 			foreach($pointingDevices as $device){	
 		?>
 			<div class="col-md-3" style="padding:5px;">
-				<div class="card" style="height:100%;padding:5px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff">
+				<div class="card" style="height:100%;padding:5px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff;">
 				  <div style="text-align:center;">
 					<h6 class="card-title">
 						<?php echo $device['Name'];?>
 					</h6>
-					<!--<p><?php echo $device['Description'];?></p> They All Seem To mAtch Name-->
+					<!--<p><?php echo $device['Description'];?></p> They all seem to match name -->
 				  </div>
 				</div>
 			</div>
@@ -144,12 +144,12 @@
 			foreach($SoundDevices as $device){	
 		?>
 			<div class="col-md-3" style="padding:5px;">
-				<div class="card" style="height:100%;padding:5px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff">
+				<div class="card" style="height:100%;padding:5px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff;">
 				  <div style="text-align:center;">
 					<h6 class="card-title">
 						<?php echo $device['Name'];?>
 					</h6>
-					<!--<p><?php echo $device['Description'];?></p> They All Seem To mAtch Name-->
+					<!--<p><?php echo $device['Description'];?></p> They all seem to match name -->
 				  </div>
 				</div>
 			</div>
@@ -169,7 +169,7 @@
 			foreach($SerialPorts as $device){	
 		?>
 			<div class="col-md-3" style="padding:5px;">
-				<div class="card" style="height:100%;padding:5px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff">
+				<div class="card" style="height:100%;padding:5px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff;">
 				  <div style="text-align:center;">
 					<h6 class="card-title">
 						<?php echo $device['DeviceID'];?>
@@ -187,9 +187,11 @@
 	</div>
 </div>
 	<hr>
-	<h6 style="color:<?php echo $siteSettings['theme']['Color 1'];?>"><b>Plug And Play Devices (<?php echo count($json['WMI_PnPEntity']); ?>)</b></h6>
+	<h6 style="color:<?php echo $siteSettings['theme']['Color 1'];?>">
+		<b>Plug And Play Devices (<?php echo count($json['WMI_PnPEntity']); ?>)</b>
+	</h6>
 	<div style="overflow:auto;width:100%;">
-		<table style="line-height:20px;overflow:scroll;font-size:14px;margin-top:8px" class="table table-striped table-hover">
+		<table style="line-height:20px;overflow:scroll;font-size:14px;margin-top:8px;" class="table table-striped table-hover">
 		  <thead class="thead-dark">
 			<tr>
 			  <th scope="col">#</th>

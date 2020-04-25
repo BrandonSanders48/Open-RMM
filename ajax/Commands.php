@@ -1,9 +1,11 @@
 <?php
 	include("../Includes/db.php");
 	$computerID = (int)$_GET['ID'];
+	
 	$query = "SELECT ID, hostname FROM computerdata WHERE ID='".$computerID."' LIMIT 1";
 	$results = mysqli_query($db, $query);
 	$result = mysqli_fetch_assoc($results);
+	
 	$query = "SELECT ID, time_received,command, arg, expire_after,status,time_sent FROM commands WHERE status='Sent' or status='Received' AND ComputerID='".$result['hostname']."' ORDER BY ID DESC LIMIT 100";
 	$results = mysqli_query($db, $query);
 	$commandCount = mysqli_num_rows($results);
@@ -41,19 +43,20 @@
 			  <td><?php echo $command['time_sent'];?></td>
 			  <td>
 				  <?php if($command['time_received']!=""){
-					  		echo  $command['time_received'];
+					  	   echo  $command['time_received'];
 					   }else{
 						   echo "N/A";
-					   } ?>
+					   }
+				  ?>
 			  </td>
 			  <td><b><?php echo $command['status'];?></b></td>
 			   <td>
 				   <form action="index.php" method="POST">
 						<input type="hidden" name="type" value="DeleteCommand"/>
 						<input type="hidden" name="ID" value="<?php echo $command['ID']; ?>"/>
-							<button type="submit" title="Delete Command" style="border:none;" class="btn btn-danger btn-sm">
-								<i class="fas fa-trash" ></i>
-							</button>
+						<button type="submit" title="Delete Command" style="border:none;" class="btn btn-danger btn-sm">
+							<i class="fas fa-trash" ></i>
+						</button>
 					</form>
 				</td>
 			</tr>

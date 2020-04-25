@@ -6,13 +6,16 @@
 	}
 	$add = 20;
 	$count = 0;
-	//$sort = (trim($_GET['sort'])!="" ? $_GET['sort'] : "ID");
-	$search = ($_GET['search']);
-	$filters = ($_GET['filters']);
+
+	$search = $_GET['search'];
+	$filters = $_GET['filters'];
+	
 	$query = "SELECT username,nicename FROM users WHERE ID='".$_SESSION['userid']."' LIMIT 1";
 	$results = mysqli_query($db, $query);
 	$user = mysqli_fetch_assoc($results);
-	$username=$user['username'];
+	$username = $user['username'];
+	
+	//Get Welcome Text
 	function welcome(){
 	   if(date("H") < 12){
 	     return "Good Morning";
@@ -23,9 +26,9 @@
 	   }
    }
 ?>
-	<div class="row" style="margin-bottom:10px;margin-top:-8px;border-radius:3px;overflow:hidden;padding:0px">
+	<div class="row" style="margin-bottom:10px;margin-top:-8px;border-radius:3px;overflow:hidden;padding:0px;">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:5px;padding-bottom:20px;padding-top:1px;border-radius:6px;">
-				<div class="d-none d-md-block ">	<p style="font-size:22px;display:inline"><?php echo welcome().", ".ucwords($username);?>!</p>
+				<div class="d-none d-md-block ">	<p style="font-size:22px;display:inline;"><?php echo welcome().", ".ucwords($username);?>!</p>
 					<a href="#" title="Refresh" onclick="loadSection('Dashboard');" class="btn btn-sm" style="float:right;color:#fff;background:<?php echo $siteSettings['theme']['Color 1'];?>;margin-left:5px;">
 						<i class="fas fa-sync"></i>
 					</a>
@@ -50,7 +53,7 @@
 			   </div>
 			   <form method="post" action="index.php">
 				   <div id="printTable" style="overflow:auto;width:100%;">
-					<table style="line-height:20px;overflow:hidden;font-size:14px;margin-top:8px" class="table table-striped table-hover">
+					<table style="line-height:20px;overflow:hidden;font-size:14px;margin-top:8px;" class="table table-striped table-hover">
 					  <col width="30">
 					  <col width="30">
 					  <col width="280">
@@ -138,7 +141,7 @@
 						?>
 					  	<tr>
 							  <td>
-								<input class="computerChkBox" name="computers[]" value="<?php echo $result['ID']; ?>" style="display:inline;appearance:none;" type="checkbox" oncheck>
+								<input class="computerChkBox" name="computers[]" value="<?php echo $result['ID']; ?>" style="display:inline;appearance:none;" type="checkbox"/>
 							  </td>
 							  <th scope="row">
 								<?php if($count==$limit - 10){?>
@@ -167,32 +170,33 @@
 							  </td>
 							  <td>
 								<?php $alertCount = count($data['Alerts']);?>
-								<?php if($result['show_alerts']=="1"){ 
-										if($alertCount > 0){?>
-									<span class="" style="cursor:pointer;font-size:14px;" data-toggle="modal" data-target="#computerAlerts" style="cursor:pointer;" onclick="computerAlertsModal('<?php echo strtoupper($result['hostname']);?>','<?php echo $data['Alerts_raw'];?>');">
-										<i title="Warning" class="text-warning fa fa-circle" aria-hidden="true"></i>
-										<?php echo $alertCount+2;?>
-									</span>   
-									<span class="" style="cursor:pointer;margin-left:15px" data-toggle="modal" data-target="#computerAlerts" style="cursor:pointer;" onclick="computerAlertsModal('<?php echo strtoupper($result['hostname']);?>','<?php echo $data['Alerts_raw'];?>');">
-										<i title="Priority" class="text-danger fa fa-circle" aria-hidden="true"></i>
-										<?php echo $alertCount;?>
-									</span>
-								<?php }else{?>
-									<span class="" data-toggle="modal" data-target="#computerAlerts" style="cursor:pointer;" onclick="computerAlertsModal('<?php echo strtoupper($result['hostname']);?>');">
-										<i class="text-success fas fa-circle"></i> 
-									</span>
-								<?php } }?>
+								<?php if($result['show_alerts']=="1"){ ?>
+									<?php if($alertCount > 0){?>
+										<span style="cursor:pointer;font-size:14px;" data-toggle="modal" data-target="#computerAlerts" style="cursor:pointer;" onclick="computerAlertsModal('<?php echo strtoupper($result['hostname']);?>','<?php echo $data['Alerts_raw'];?>');">
+											<i title="Warning" class="text-warning fa fa-circle" aria-hidden="true"></i>
+											<?php echo $alertCount+2;?>
+										</span>   
+										<span style="cursor:pointer;margin-left:15px;" data-toggle="modal" data-target="#computerAlerts" style="cursor:pointer;" onclick="computerAlertsModal('<?php echo strtoupper($result['hostname']);?>','<?php echo $data['Alerts_raw'];?>');">
+											<i title="Priority" class="text-danger fa fa-circle" aria-hidden="true"></i>
+											<?php echo $alertCount;?>
+										</span>
+									<?php }else{?>
+										<span class="" data-toggle="modal" data-target="#computerAlerts" style="cursor:pointer;" onclick="computerAlertsModal('<?php echo strtoupper($result['hostname']);?>');">
+											<i class="text-success fas fa-circle"></i> 
+										</span>
+									<?php } ?>
+								<?php}?>
 							  </td>
 							  <?php
 									$username = textOnNull($data['WMI_ComputerSystem'][0]['UserName'], "Unknown");
-								?>
-							  <td style="cursor:pointer" onclick="searchFilterAdd('LoggedIn: <?php echo ucwords((strpos($username, "\\")!==false ? explode("\\", $username)[1] : $username));?>');"><u>
-								<?php
-									echo ucwords((strpos($username, "\\")!==false ? explode("\\", $username)[1] : $username));
-								?></u>
+							  ?>
+							  <td style="cursor:pointer;" onclick="searchFilterAdd('LoggedIn: <?php echo ucwords((strpos($username, "\\")!==false ? explode("\\", $username)[1] : $username));?>');">
+								<u>
+									<?php echo ucwords((strpos($username, "\\")!==false ? explode("\\", $username)[1] : $username));	?>
+								</u>
 							  </td>
-							  <td style="cursor:pointer" onclick="searchFilterAdd('WinVer: <?php echo $data['WMI_OS'][0]['Caption'];?>');"><u><?php echo textOnNull(str_replace('Microsoft', '',$data['WMI_OS'][0]['Caption']), "Microsoft Windows");?></u></td>
-							  <td style="cursor:pointer" onclick="searchFilterAdd('Arch: <?php echo $data['WMI_OS'][0]['OSArchitecture'];?>');"><u><?php echo textOnNull($data['WMI_OS'][0]['OSArchitecture']);?></u></td>
+							  <td style="cursor:pointer;" onclick="searchFilterAdd('WinVer: <?php echo $data['WMI_OS'][0]['Caption'];?>');"><u><?php echo textOnNull(str_replace('Microsoft', '',$data['WMI_OS'][0]['Caption']), "Microsoft Windows");?></u></td>
+							  <td style="cursor:pointer;" onclick="searchFilterAdd('Arch: <?php echo $data['WMI_OS'][0]['OSArchitecture'];?>');"><u><?php echo textOnNull($data['WMI_OS'][0]['OSArchitecture']);?></u></td>
 							  <td>
 								<a style="color:#000;" href="#" onclick="searchItem('<?php echo textOnNull($result['name'], "N/A");?>');">
 									<u><?php echo textOnNull($result['name'], "Not Assigned");?></u>
@@ -229,8 +233,9 @@
 					Add Selected To..
 				</button>
 				<button onclick="printData();" title="Export As CSV File" class="btn btn-sm" style="float:left;color:#fff;background:<?php echo $siteSettings['theme']['Color 1'];?>;margin-right:5px;">
-					<i class="fas fa-file-csv"></i>  Export Table
+					<i class="fas fa-file-csv"></i> Export Table
 				</button>
+				
 				<!------------- Add Company Computers ------------------->
 				<div id="companyComputersModal2" class="modal fade" role="dialog">
 				  <div class="modal-dialog modal-sm">
@@ -262,9 +267,9 @@
 				</div>
 			</form>
 			<hr>
-			<?php if($resultCount >$count and $search==""){ ?>
+			<?php if($resultCount > $count && $search == ""){ ?>
 				<center>
-					<button  onclick="search($('#searchInput').val(),'Dashboard','','','<?php echo $limit + $add; ?>');" style="width:200px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff" class="btn">
+					<button  onclick="search($('#searchInput').val(),'Dashboard','','','<?php echo $limit + $add; ?>');" style="width:200px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff;" class="btn">
 						Load More
 					</button>
 					<button  data-toggle="modal" data-target="#confirmModal" style="background:<?php echo $siteSettings['theme']['Color 2'];?>;color:#fff;" class="btn btn-sm">
@@ -275,13 +280,16 @@
 			<?php if($resultCount <= $count and $search==""){ ?>
 				<div>
 					<center>
-						<a style="width:150px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff;" class="btn">No More Results</a>
+						<a style="width:150px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff;" class="btn">
+							No More Results
+						</a>
 					</center>
 				</div>
 			<?php } ?>
 		</div>
 	</div>
 </div>
+
 <!--------------------------------------modals---------------------------------------------->
 <div id="confirmModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -291,7 +299,7 @@
 	  </div>
 	  <form method="post">
 		  <div class="modal-body">
-			<p style="font-size:14px">This Will List All Computers. This Could Take A While.</p>
+			<p style="font-size:14px;">This Will List All Computers. This Could Take A While.</p>
 		  </div>
 		  <div class="modal-footer">
 			<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
@@ -301,6 +309,7 @@
 	</div>
   </div>
 </div>
+
 <div id="searchFilterModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
 	<div class="modal-content">
@@ -308,7 +317,7 @@
 		<h6 class="modal-title">Filter Search</h6>
 	  </div>
 	  <div class="modal-body">
-		<p style="font-size:14px"> Select A Tag Or Multiple Tags To Refine Your Search. Please Note, Tags Are Not Case-Sensitive.</p>
+		<p style="font-size:14px;">Select A Tag Or Multiple Tags To Refine Your Search. Please Note, Tags Are Not Case-Sensitive.</p>
 		<div class="row">
 			<div class="col-md-6" style="padding:5px;">
 				<?php
@@ -318,16 +327,18 @@
 					if($count % 2 == 0){
 					?>
 						<div class="card" style="margin-bottom:5px;padding:5px;">
-							<h6 style="font-size:14px;" ><?php echo $filter['Nicename'];?></h6>
+							<h6 style="font-size:14px;"><?php echo $filter['Nicename'];?></h6>
 							<div class="row" style="margin-left:5px;">
 								<?php foreach($filter['options'] as $option){?>
 									<?php if($option == "*"){?>
 										<?php $id = "sr".rand(100000,1000000000);?>
 										<br>
 										<div style="margin-left:-10px;margin-top:0px;" class="col-md-8 input-group mbs-3">
-										  <input style="height:31px;font-size:14px" type="text" class="form-control" placeholder="Custom" id="<?php echo $id;?>">
+										  <input style="height:31px;font-size:14px;" type="text" class="form-control" placeholder="Custom" id="<?php echo $id;?>">
 										  <div class="input-group-append">
-											<button style="height:31px;font-size:12px;;border-color:#696969;color:#696969" class="btn btn-outline btn-sm" type="button" id="button-addon2" onclick="searchFilterAdd('<?php echo $type;?>: '+$('#<?php echo $id;?>').val());">Go</button>
+											<button style="height:31px;font-size:12px;;border-color:#696969;color:#696969;" class="btn btn-outline btn-sm" type="button" id="button-addon2" onclick="searchFilterAdd('<?php echo $type;?>: '+$('#<?php echo $id;?>').val());">
+												Go
+											</button>
 										  </div>
 										</div>
 									<?php }else{?>
@@ -348,15 +359,15 @@
 					if($count % 2 == 0){ }else{ ?>
 					<div class="card" style="margin-bottom:5px;padding:5px;">
 							<h6 style="font-size:14px;"><?php echo $filter['Nicename'];?></h6>
-								<div class="row" style="margin-left:5px">
+								<div class="row" style="margin-left:5px;">
 								<?php foreach($filter['options'] as $option){?>
 									<?php if($option == "*"){?>
 										<?php $id = "sr".rand(100000,1000000000);?>
 										<br>
-											<div style="margin-left:-10px;margin-top:0px" class="col-md-8 input-group mbs-3">
-											  <input style="height:31px;font-size:14px" type="text" class="form-control" placeholder="Custom" id="<?php echo $id;?>">
+											<div style="margin-left:-10px;margin-top:0px;" class="col-md-8 input-group mbs-3">
+											  <input style="height:31px;font-size:14px;" type="text" class="form-control" placeholder="Custom" id="<?php echo $id;?>">
 											  <div class="input-group-append">
-												<button style="height:31px;font-size:12px;border-color:#696969;color:#696969" class="btn btn-outline btn-sm" type="button" id="button-addon2" onclick="searchFilterAdd('<?php echo $type;?>: '+$('#<?php echo $id;?>').val());">Go</button>
+												<button style="height:31px;font-size:12px;border-color:#696969;color:#696969;" class="btn btn-outline btn-sm" type="button" id="button-addon2" onclick="searchFilterAdd('<?php echo $type;?>: '+$('#<?php echo $id;?>').val());">Go</button>
 											  </div>
 											</div>
 									<?php }else{?>
@@ -372,8 +383,9 @@
 			</div>
 		</div>
 	  </div>
+	  
 	  <script>
-	  //need to check if part after colon is empty or not. otherwise can filter ex. WinVer: (blank)
+	    //need to check if part after colon is empty or not. otherwise can filter ex. WinVer: (blank)
 		function searchFilterAdd(filter){
 			if ($("#filterInput").val().indexOf(filter) !== -1) {
 				$("#searchFilterModal").modal('hide');
@@ -389,6 +401,7 @@
 			}
 		}
 	  </script>
+	  
 	  <div class="modal-footer">
 		<button type="button" class="btn btn-sm" style="background:<?php echo $siteSettings['theme']['Color 2']; ?>;color:#fff;" data-dismiss="modal">Close</button>
 	  </div>
@@ -396,6 +409,7 @@
   </div>
 </div>
 <!---------------------------------End MODALS------------------------------------->
+
 <script>
 	function printData(filename) {
 		var csv = [];
@@ -408,6 +422,7 @@
 		}
 		downloadCSV(csv.join("\n"), "page.csv");
 	}
+	
 	function downloadCSV(csv, filename) {
 		var csvFile;
 		var downloadLink;
@@ -419,18 +434,15 @@
 		document.body.appendChild(downloadLink);
 		downloadLink.click();
 	}
+	
 	function searchItem(text, page="Dashboard", ID=0, filters="", limit=25){
 		$(".loadSection").load("ajax/"+page+".php?limit="+limit+"&search="+encodeURI(text)+"&ID="+ID+"&filters="+encodeURI(filters));
 	}
+	
 	$('#searchInput').keypress(function(event){
 		var keycode = (event.keyCode ? event.keyCode : event.which);
 		if(keycode == '13'){
 			searchItem($('#searchInput').val(),'Dashboard','', $('#filterInput').val());
-		}
-	});
-	$('input[type="checkbox"][name="change"]').change(function() {
-		if(this.checked) {
-		}else{
 		}
 	});
 </script>

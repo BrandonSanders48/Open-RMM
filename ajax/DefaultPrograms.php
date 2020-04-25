@@ -17,7 +17,7 @@
 	$error = $json['DefaultPrograms_error'];
 
 ?>
-<h4 style="color:<?php echo $siteSettings['theme']['Color 1'];?>">
+<h4 style="color:<?php echo $siteSettings['theme']['Color 1'];?>;">
 	Default Programs (<?php echo count($programs);?>)
 </h4>
 <?php if($showDate == "latest"){?>
@@ -54,8 +54,8 @@
 		</div>
 	</div>
 </div>
-<div style="overflow:auto;width:100%">
-	<table style="line-height:20px;overflow:hidden;font-size:14px;margin-top:8px" class="table table-striped table-hover">
+<div style="overflow:auto;width:100%;">
+	<table style="line-height:20px;overflow:hidden;font-size:14px;margin-top:8px;" class="table table-striped table-hover">
 	  <thead class="thead-dark">
 		<tr>
 		  <th scope="col">#</th>
@@ -85,8 +85,9 @@
 			  <td><?php echo textOnNull($program["Program"],"N/A");?></td>
 			  <td><?php echo textOnNull($program["Ext"],"N/A");?></td>
 			  <td>
-				<button onclick='sendCommand("cmd", "assoc <?php echo $program['Ext']; ?>=", "Clear default for <?php echo $program['Ext']; ?> filetype");' class="btn btn-sm" style="margin-top:-2px;padding:5px;padding-top:2px;padding-bottom:2px;background:maroon;color:#fff;" title="May Require A Reboot">
-					<i class="fas fa-eraser"></i>
+				<button onclick='sendCommand("cmd", "assoc <?php echo $program['Ext']; ?>=", "Clear default for <?php echo $program['Ext']; ?> filetype");' class="btn btn-sm"
+					style="margin-top:-2px;padding:5px;padding-top:2px;padding-bottom:2px;background:maroon;color:#fff;" title="May Require A Reboot">
+					<i class="fas fa-eraser"></i>
 				</button>
 			  </td>
 			</tr>

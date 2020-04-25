@@ -14,7 +14,7 @@
 	</button>	
 
 <hr/>
- <div style="overflow:auto;width:100%">
+ <div style="overflow:auto;width:100%;">
 	<table style="line-height:20px;overflow:hidden;font-size:14px;margin-top:8px;" class="table table-striped table-hover">
 	 <col width="50">
 	 <col width="200">

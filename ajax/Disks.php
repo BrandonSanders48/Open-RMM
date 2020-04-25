@@ -131,12 +131,12 @@
 			  </div>
 			  
 			  <div class="progress" style="background:<?php echo $siteSettings['theme']['Color 3']; ?>;" title="<?php echo $usedPct;?>%">
-				  <div class="progress-bar" role="progressbar" style="background:<?php echo $pbColor;?>;width:<?php echo $usedPct;?>%" aria-valuenow="<?php echo $usedPct;?>" aria-valuemin="0" aria-valuemax="100"></div>
+				  <div class="progress-bar" role="progressbar" style="background:<?php echo $pbColor;?>;width:<?php echo $usedPct;?>%;" aria-valuenow="<?php echo $usedPct;?>" aria-valuemin="0" aria-valuemax="100"></div>
 			  </div>
 			  
 			  <center>
 				<p style="color:#666;">
-					<?php echo $status; ?> Used <br/>
+					<?php echo $status; ?> Used<br/>
 					<b>Location:</b> <?php echo $disk['ProviderName'];?>
 				</p>
 			  </center>
