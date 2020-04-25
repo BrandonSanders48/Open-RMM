@@ -81,7 +81,7 @@
 		<?php }?>
 		<?php if($count == 0){?>
 			<tr>
-				<td colspan="7"><center>No users</center></td>
+				<td colspan="7"><center><h4>No users</h4></center></td>
 			</tr>
 		<?php }?>
 	   </tbody>

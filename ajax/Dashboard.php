@@ -29,36 +29,37 @@
 ?>
 	<div class="row" style="margin-bottom:10px;margin-top:-8px;border-radius:3px;overflow:hidden;padding:0px;">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:5px;padding-bottom:20px;padding-top:1px;border-radius:6px;">
-				<div class="d-none d-md-block ">	<p style="font-size:22px;display:inline;"><?php echo welcome().", ".ucwords($username);?>!</p>
-					<a href="#" title="Refresh" onclick="loadSection('Dashboard');" class="btn btn-sm" style="float:right;color:#fff;background:<?php echo $siteSettings['theme']['Color 1'];?>;margin-left:5px;">
-						<i class="fas fa-sync"></i>
-					</a>
-					<a href="../../download/" style="display:inline;float:right;background:<?php echo $siteSettings['theme']['Color 4'];?>;color:#fff;" class="btn btn-sm">
-						<i class="fas fa-download"></i> Download Agent
-					</a>&nbsp;
-					<a href="#" data-toggle="modal" data-target="#agentUpload" style="margin-right:5px;display:inline;float:right;background:<?php echo $siteSettings['theme']['Color 5'];?>;color:#fff;" class="btn btn-sm">
-						<i class="fas fa-upload"></i> Upload Agent
-					</a>
+			<div class="d-none d-md-block">
+				<p style="font-size:22px;display:inline;"><?php echo welcome().", ".ucwords($username);?>!</p>
+				<a href="#" title="Refresh" onclick="loadSection('Dashboard');" class="btn btn-sm" style="float:right;color:#fff;background:<?php echo $siteSettings['theme']['Color 1'];?>;margin-left:5px;">
+					<i class="fas fa-sync"></i>
+				</a>
+				<a href="../../download/" style="display:inline;float:right;background:<?php echo $siteSettings['theme']['Color 4'];?>;color:#fff;" class="btn btn-sm">
+					<i class="fas fa-download"></i> Download Agent
+				</a>&nbsp;
+				<a href="#" data-toggle="modal" data-target="#agentUpload" style="margin-right:5px;display:inline;float:right;background:<?php echo $siteSettings['theme']['Color 5'];?>;color:#fff;" class="btn btn-sm">
+					<i class="fas fa-upload"></i> Upload Agent
+				</a>
+		   </div>
+		   <div style="margin-top:5px;padding:15px;margin-bottom:8px;" class="card card-sm">
+				<div style="padding:5px;" class="input-group">
+				  <div class="custom-file group-inline search-field-dashboard">
+					<input id="searchInput" value="<?php echo $search; ?>" name="search" class="form-control form-control-md form-control-borderless" type="text" style="min-width:100px;" placeholder="Search By Hostname, Company Or Client Name"/>
+					<button class="btn btn-md" id="search" style="margin-left:-4px;border-radius:0px 4px 4px 0px;background:<?php echo $siteSettings['theme']['Color 4']; ?>;color:#fff;" type="button" onclick="search($('#searchInput').val(), 'Dashboard', '', $('#filterInput').val());">
+						<i class="fas fa-search"></i>
+					</button>
+				  </div>
+				  <div class="input-group-append search-field-dashboard">
+					&nbsp;
+					<input id="filterInput" data-role="tagsinput" value="<?php echo $filters; ?>" name="filters" class="form-control form-control-md form-control-borderless" type="text" placeholder="Selected Filters"/>
+					<button class="btn btn-md" style="margin-left:-4px;border-radius:0px 4px 4px 0px;background:<?php echo $siteSettings['theme']['Color 1']; ?>;color:#fff;" type="button" data-toggle="modal" data-target="#searchFilterModal">
+						<i class="fas fa-cog"></i>
+					</button>
+				  </div>
 				</div>
-			   <div style="margin-top:5px;padding:15px;margin-bottom:8px;" class="card card-sm">
-					<div style="padding:5px;" class="input-group">
-					  <div class="custom-file group-inline search-field-dashboard">
-						<input id="searchInput" value="<?php echo $search; ?>" name="search" class="form-control form-control-md form-control-borderless" type="text" style="min-width:100px;" placeholder="Search By Hostname, Company Or Client Name"/>
-						<button class="btn btn-md" id="search" style="margin-left:-4px;border-radius:0px 4px 4px 0px;background:<?php echo $siteSettings['theme']['Color 4']; ?>;color:#fff;" type="button" onclick="search($('#searchInput').val(), 'Dashboard', '', $('#filterInput').val());">
-							<i class="fas fa-search"></i>
-						</button>
-					  </div>
-					  <div class="input-group-append search-field-dashboard">
-						&nbsp;
-						<input id="filterInput" data-role="tagsinput" value="<?php echo $filters; ?>" name="filters" class="form-control form-control-md form-control-borderless" type="text" placeholder="Selected Filters"/>
-						<button class="btn btn-md" style="margin-left:-4px;border-radius:0px 4px 4px 0px;background:<?php echo $siteSettings['theme']['Color 1']; ?>;color:#fff;" type="button" data-toggle="modal" data-target="#searchFilterModal">
-							<i class="fas fa-cog"></i>
-						</button>
-					  </div>
-					</div>
-			   </div>
-			   <form method="post" action="index.php">
-				   <div id="printTable" style="overflow:auto;width:100%;">
+		   </div>
+		   <form method="post" action="index.php">
+				<div id="printTable" style="overflow:auto;width:100%;">
 					<table style="line-height:20px;overflow:hidden;font-size:14px;margin-top:8px;" class="table table-striped table-hover">
 					  <col width="30">
 					  <col width="30">
@@ -143,10 +144,12 @@
 									$pbColor = "red";
 								}elseif($usedPct > $siteSettings['Alert Settings']['Disk']['Warning']){
 									$pbColor = "#ffa500";
-								}else{ $pbColor = $siteSettings['theme']['Color 4']; }
+								}else{
+									$pbColor = $siteSettings['theme']['Color 4'];
+								}
 								$count++;
 						?>
-					  	<tr>
+					  	  <tr>
 							  <td>
 								<input class="computerChkBox" name="computers[]" value="<?php echo $result['ID']; ?>" style="display:inline;appearance:none;" type="checkbox"/>
 							  </td>
@@ -192,7 +195,7 @@
 											<i class="text-success fas fa-circle"></i> 
 										</span>
 									<?php } ?>
-								<?php}?>
+								<?php }?>
 							  </td>
 							  <?php
 									$username = textOnNull($data['WMI_ComputerSystem'][0]['UserName'], "Unknown");
@@ -202,8 +205,12 @@
 									<?php echo ucwords((strpos($username, "\\")!==false ? explode("\\", $username)[1] : $username));	?>
 								</u>
 							  </td>
-							  <td style="cursor:pointer;" onclick="searchFilterAdd('WinVer: <?php echo $data['WMI_OS'][0]['Caption'];?>');"><u><?php echo textOnNull(str_replace('Microsoft', '',$data['WMI_OS'][0]['Caption']), "Microsoft Windows");?></u></td>
-							  <td style="cursor:pointer;" onclick="searchFilterAdd('Arch: <?php echo $data['WMI_OS'][0]['OSArchitecture'];?>');"><u><?php echo textOnNull($data['WMI_OS'][0]['OSArchitecture']);?></u></td>
+							  <td style="cursor:pointer;" onclick="searchFilterAdd('WinVer: <?php echo $data['WMI_OS'][0]['Caption'];?>');">
+								<u><?php echo textOnNull(str_replace('Microsoft', '',$data['WMI_OS'][0]['Caption']), "Microsoft Windows");?></u>
+							  </td>
+							  <td style="cursor:pointer;" onclick="searchFilterAdd('Arch: <?php echo $data['WMI_OS'][0]['OSArchitecture'];?>');">
+								<u><?php echo textOnNull($data['WMI_OS'][0]['OSArchitecture']);?></u>
+							  </td>
 							  <td>
 								<a style="color:#000;" href="#" onclick="searchItem('<?php echo textOnNull($result['name'], "N/A");?>');">
 									<u><?php echo textOnNull($result['name'], "Not Assigned");?></u>
@@ -211,7 +218,7 @@
 							  </td>
 							  <td>
 								<div class="progress" style="margin-top:5px;height:10px;background:<?php echo $siteSettings['theme']['Color 3']; ?>;" title="<?php echo $usedPct;?>%">
-									<div class="progress-bar" role="progressbar" style=";background:<?php echo $pbColor;?>;width:<?php echo $usedPct;?>%;" aria-valuenow="<?php echo $usedPct;?>" aria-valuemin="0" aria-valuemax="100"></div>
+									<div class="progress-bar" role="progressbar" style="background:<?php echo $pbColor;?>;width:<?php echo $usedPct;?>%;" aria-valuenow="<?php echo $usedPct;?>" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							  </td>
 							  <td>
@@ -226,7 +233,7 @@
 						<?php }?>
 						<?php  if($count==0){ ?>
 							<tr>
-								<td colspan=9>
+								<td colspan="10">
 									<p style="text-align:center;font-size:18px;">
 										<b>No Computers To Display</b>
 									</p>
@@ -273,7 +280,7 @@
 				  </div>
 				</div>
 			</form>
-			<hr>
+			<hr/>
 			<?php if($resultCount > $count && $search == ""){ ?>
 				<center>
 					<button  onclick="search($('#searchInput').val(),'Dashboard','','','<?php echo $limit + $add; ?>');" style="width:200px;background:<?php echo $siteSettings['theme']['Color 3'];?>;color:#fff;" class="btn">
