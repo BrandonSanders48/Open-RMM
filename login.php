@@ -6,13 +6,13 @@ if(isset($_POST['username'], $_POST['password'])){
 	$username = mysqli_escape_string($db, clean(strip_tags($_POST['username'])));
 	$password = mysqli_escape_string($db, strip_tags($_POST['password']));
 	
-	$query = "SELECT * FROM users where active='1' and username='".$username."'";
+	$query = "SELECT * FROM users WHERE active='1' AND username='".$username."'";
 	$results= mysqli_query($db, $query);
 	$count = mysqli_num_rows($results);
 	$data = mysqli_fetch_assoc($results);
 	$dbPassword = crypto('decrypt', $data['password'], $data['hex']);
 	
-	if($password!==$dbPassword || $dbPassword==""){
+	if($password !== $dbPassword || $dbPassword == ""){
 		$count = 0;
 	}
 
@@ -22,20 +22,20 @@ if(isset($_POST['username'], $_POST['password'])){
 		$_SESSION['userid'] = $data['ID'];
 		$_SESSION['username'] = $data['username'];
 		$_SESSION['showModal'] = "true";
-		$_SESSION['recent'] = explode(",",$data['recents']);
-		if($data['recents']==""){ 
+		$_SESSION['recent'] = explode(",", $data['recents']);
+		if($data['recents'] == ""){ 
 			$_SESSION['recent'] = array(); 
 		}
-		$_SESSION['recentedit'] = explode(",",$data['recentedit']);
-		if($data['recentedit']==""){ 
-			$_SESSION['recentedit'] = array();
+		$_SESSION['recentedit'] = explode(",", $data['recentedit']);
+		if($data['recentedit'] == ""){ 
+			$_SESSION['recentedit'] = array(); 
 		}
 		header("location: index.php");
 	}else{
 		$message = " <span style='color:red'>Incorrect Login Info.</span>";
 	}
 }
-if($_SESSION['userid']!=""){ 
+if($_SESSION['userid'] != ""){ 
 	header("location: index.php");
 	exit;
 }
