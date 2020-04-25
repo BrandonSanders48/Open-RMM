@@ -261,14 +261,20 @@
 	}
 	
 	//Encrypt And Decrypt With Salt
+	function crypto($action, $string, $salt) {
+		return $string;
+	}
+	
+	/*
 	$salt = base64_decode("R1pxNEU1aXBBc21rWW5GQ3dVdrQ1F4cUVabGppTk9aWXEzdE1ZRQ==");
 	function crypto($action, $string, $salt) {
+		
 		$output = false;
 		$encrypt_method = "AES-256-CBC";
 		$secret_key = base64_decode('J1HX1VuMWlEtSXQzZCE=');
 		$key = hash('sha256', $secret_key);
 		$iv = substr(hash('sha256', $salt), 0, 16);
-		if ( $action == 'encrypt' ) {
+		if ($action == 'encrypt') {
 			$output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
 			$output = base64_encode($output);
 		} else if( $action == 'decrypt' ) {
@@ -276,6 +282,7 @@
 		}
 		return $output;
 	}
+	*/
 	
 	//Get Random Salt
 	function getSalt($n=40) {
