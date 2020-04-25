@@ -108,7 +108,7 @@
 				</div>
 			</div>
 		</form>
-			<div style="margin-top:20px" class="panel panel-default">
+			<div style="margin-top:20px;" class="panel panel-default">
 			   <div class="panel-heading">
 					<h4 class="panel-title">
 						Company Information
@@ -148,12 +148,12 @@
 							if($data['hostname']==""){continue;}
 							$count++;
 						?>
-						<a href="#" class="text-dark" onclick="loadSection('Edit', '<?php echo $data['ID']; ?>');">
-							<li class="list-group-item">
-								<i class="fas fa-desktop"></i>&nbsp;
-								<?php echo strtoupper($data['hostname']);?>
-							</li>
-						</a>
+							<a href="#" class="text-dark" onclick="loadSection('Edit', '<?php echo $data['ID']; ?>');">
+								<li class="list-group-item">
+									<i class="fas fa-desktop"></i>&nbsp;
+									<?php echo strtoupper($data['hostname']);?>
+								</li>
+							</a>
 						<?php } ?>
 						<?php if($count==0){ ?>
 							<li class="list-group-item">No Recent Computers</li>
@@ -164,6 +164,7 @@
 		</div>
 	</div>
 </div>
+
 <!-----------------------------------------modal------------------------------->
 <div id="delModal" class="modal fade" role="dialog">
   <div class="modal-dialog">

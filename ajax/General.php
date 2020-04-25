@@ -59,8 +59,8 @@
 		<b><?php echo $alert; ?></b>
 	</div>
 <?php } ?>
-<div class="row" style="color:#383838;border: 1px solid #dedede;text-align:center;margin-bottom:10px;margin-top:10px;border-radius:3px;overflow:hidden;padding:5px;background-color:#fff;heigsht:85px">
-	<div style="font-size:32px;border-radius:6px;margin-top:15px" class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+<div class="row" style="color:#383838;border: 1px solid #dedede;text-align:center;margin-bottom:10px;margin-top:10px;border-radius:3px;overflow:hidden;padding:5px;background-color:#fff;heigsht:85px;">
+	<div style="font-size:32px;border-radius:6px;margin-top:15px;" class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
 		<b>
 			<?php $alertCount = count($json['Alerts']);?>
 			<?php if($alertCount > 0){?>
@@ -85,7 +85,7 @@
 			</h4>
 		</p>
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" style="margin-top:10px">
+	<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" style="margin-top:10px;">
 		<div style="color:#383838;" class="row">
 			<div class="col-sm-2" onclick="loadSection('Printers');" style="cursor:pointer;max-width:33%;">
 				<i style="font-size:26px;color:#696969;" class="fas fa-print"></i>
@@ -115,41 +115,7 @@
 		</div>
 	</div>
 </div>
-<!--<div class="row" style="margin-bottom:20px;color:#fff;background:<?php echo $siteSettings['theme']['Color 1'];?>;padding:5px;border-radius:6px;border: 1px solid #dedede;">
-<canvas class="col-xs-11 col-sm-11 col-md-11 col-lg-11" id="myChart" width="400" height="100"></canvas>
-</div>
-<script>
-var ctx = document.getElementById('myChart');
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-			fill:false,
-          data: [{
-				x: 100,
-				y: 200
-			}, {
-				x: 15,
-				y: 10
-			}],       
-            borderColor: [
-                'green'  
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {	
-        scales: {
-            yAxes: [{				
-					stacked: true
-            }]
-        }
-    }
-});
-Chart.defaults.global.defaultFontColor='#fff';
-</script>-->
+
 <div class="row">
 	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:5px;">
 		<div class="card">
@@ -162,7 +128,8 @@ Chart.defaults.global.defaultFontColor='#fff';
 							<?php echo textOnNull(($company['name']!="N/A" ? $company['name'] : ""), "No Company Info"); ?>
 						</a>
 					</h4>
-					<span style="color:#666;font-size:14px;"><?php echo textOnNull(phone($result['phone']), "No Company Phone"); ?> |
+					<span style="color:#666;font-size:14px;">
+						<?php echo textOnNull(phone($result['phone']), "No Company Phone"); ?> |
 						<a href="mailto:<?php echo $result['email']; ?>">
 							<?php echo textOnNull(phone($result['email']), "No Company Email"); ?>
 						</a>
@@ -255,7 +222,7 @@ Chart.defaults.global.defaultFontColor='#fff';
 								$pbColor = "#ffa500"; //Warning
 							}else{ $pbColor = $siteSettings['theme']['Color 4']; }
 						?>
-						<span style="font-size:30px;color:<?php echo $pbColor;?>">
+						<span style="font-size:30px;color:<?php echo $pbColor;?>;">
 							<?php echo textOnNull($cpu, "N/A"); ?>%
 						</span><br/>
 						<span>Processor Load</span>
@@ -269,8 +236,11 @@ Chart.defaults.global.defaultFontColor='#fff';
 			  <div class="card-body" style="padding:10px;">
 				<h5>Computer Type</h5>
 				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-21">
-						&nbsp;&nbsp;<a href="#" onclick="loadSection('Edit');" style="font-size:16px;"><?php echo textOnNull($result['computerType'], "Not Set");?></a>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						&nbsp;&nbsp;
+						<a href="#" onclick="loadSection('Edit');" style="font-size:16px;">
+							<?php echo textOnNull($result['computerType'], "Not Set");?>
+						</a>
 					</div>
 				</div>
 			  </div>
@@ -313,7 +283,7 @@ Chart.defaults.global.defaultFontColor='#fff';
 				<h5>Processor</h5>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<span style="font-size:16px">
+						<span style="font-size:16px;">
 							<?php echo textOnNull(str_replace("(R)","",str_replace("(TM)","",$json['WMI_Processor'][0]['Name'])), "N/A");?>
 						</span>
 					</div>
@@ -327,7 +297,10 @@ Chart.defaults.global.defaultFontColor='#fff';
 				<h5>Operating System</h5>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						&nbsp;&nbsp;<span style="font-size:16px;"><?php echo textOnNull(str_replace("Microsoft","",$json['WMI_OS'][0]['Caption']), "N/A");?></span>
+						&nbsp;&nbsp;
+						<span style="font-size:16px;">
+							<?php echo textOnNull(str_replace("Microsoft","",$json['WMI_OS'][0]['Caption']), "N/A");?>
+						</span>
 					</div>
 				</div>
 			  </div>
@@ -339,7 +312,10 @@ Chart.defaults.global.defaultFontColor='#fff';
 				<h5>Architecture</h5>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					&nbsp;&nbsp;<span style="font-size:16px;"><?php echo textOnNull($json['WMI_ComputerSystem'][0]['SystemType'], "N/A");?></span><br/>
+						&nbsp;&nbsp;
+						<span style="font-size:16px;">
+							<?php echo textOnNull($json['WMI_ComputerSystem'][0]['SystemType'], "N/A");?>
+						</span>
 					</div>
 				</div>
 			  </div>
@@ -450,7 +426,7 @@ Chart.defaults.global.defaultFontColor='#fff';
 				<h5>Local IP Address</h5>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<span style="font-size:16px;" class="">
+						<span style="font-size:16px;">
 							&nbsp;&nbsp;<?php echo $status;?>
 						</span>
 					</div>
@@ -573,7 +549,7 @@ Chart.defaults.global.defaultFontColor='#fff';
 					<button class="btn-sm btn btn-success" onclick='sendCommand("C:\\\\Open-RMM\\\\Update.bat", "", "Update Agent", 2);' style="background:<?php echo $siteSettings['theme']['Color 4'];?>;float:right;display:inline;" title="Update to <?php echo $siteSettings['general']['agent_latest_version'];?>">
 						<i class="fas fa-cloud-upload-alt"></i> Update
 					</button>
-				<?php $latest="<b> (Outdated)</b>"; }else{ $latest="<b> (Latest)</b>"; } ?>
+				<?php $latest=" <b>(Outdated)</b>"; }else{ $latest=" <b>(Latest)</b>"; } ?>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<span style="font-size:16px;">
@@ -584,8 +560,8 @@ Chart.defaults.global.defaultFontColor='#fff';
 		  </div>
 		</div>
 	</div>
-	
 </div>
+
 <!-------------------------------MODALS------------------------------------>
 <div id="companyMoreInfo" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -621,11 +597,14 @@ Chart.defaults.global.defaultFontColor='#fff';
 		</span>
 	  </div>
 	  <div class="modal-footer">
-		<button type="button" class="btn" style="background:<?php echo $siteSettings['theme']['Color 4']; ?>;color:#fff;" data-dismiss="modal">Close</button>
+		<button type="button" class="btn" style="background:<?php echo $siteSettings['theme']['Color 4']; ?>;color:#fff;" data-dismiss="modal">
+			Close
+		</button>
 	  </div>
 	</div>
   </div>
 </div>
+
 <script>
 	$(".sidebarComputerName").text("<?php echo strtoupper($result['hostname']);?>");
 </script>
