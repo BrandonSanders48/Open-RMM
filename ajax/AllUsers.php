@@ -49,7 +49,9 @@
 			<tr>
 			  <td><b><?php echo $user['ID'];?></b></td>
 			  <td><b><?php echo ucwords($user['nicename']);?></b></td>
-			  <td><a href="mailto:<?php echo strtolower(crypto('decrypt', $user['email'], $user['hex']));?>"><?php echo textOnNull(strtolower(crypto('decrypt', $user['email'], $user['hex'])),"No Email");?></a></td>
+			  <td>
+				<a href="mailto:<?php echo strtolower(crypto('decrypt', $user['email'], $user['hex']));?>"><?php echo textOnNull(strtolower(crypto('decrypt', $user['email'], $user['hex'])),"No Email");?></a>
+			  </td>
 			  <td><?php echo strtolower($user['username']);?></td>
 			  <td><?php echo textOnNull(gmdate("m/d/Y\ h:i A", $user['last_login']),"Never");?></td>
 			  <td><?php echo $status;?></td>
