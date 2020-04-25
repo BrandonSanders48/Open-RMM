@@ -1,0 +1,60 @@
+{
+	"version": "$Id: oauth_configuration.json,v 1.43 2019/12/06 02:28:21 mlemos Exp $",
+	"comments": [
+		"The servers entry should be an object with a list of object",
+		"entries, one for each server type. The server object entry name is",
+		"the name of the server type. Each server entry is an object with",
+		"some mandatory properties: oauth_version, dialog_url,",
+		"access_token_url and request_token_url (just for Oauth 1.0 and",
+		"1.0a). Check the OAuth client class for the complete list of server",
+		"properties."
+	],
+	"servers":
+	{
+		"Google1":
+		{
+			"oauth_version": "1.0a",
+			"dialog_url": "https://www.google.com/accounts/OAuthAuthorizeToken",
+			"access_token_url": "https://www.google.com/accounts/OAuthGetAccessToken",
+			"request_token_url": "https://www.google.com/accounts/OAuthGetRequestToken?scope={SCOPE}"
+		},
+
+		"LinkedIn2":
+		{
+			"oauth_version": "2.0",
+			"dialog_url": "https://www.linkedin.com/oauth/v2/authorization?client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&response_type=code&state={STATE}",
+			"access_token_url": "https://www.linkedin.com/oauth/v2/accessToken",
+			"default_access_token_type": "Bearer"
+		},
+
+		"Reddit":
+		{
+			"oauth_version": "2.0",
+			"dialog_url": "https://ssl.reddit.com/api/v1/authorize?response_type=code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&state={STATE}",
+			"offline_dialog_url": "https://ssl.reddit.com/api/v1/authorize?response_type=code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&state={STATE}&duration=permanent",
+			"access_token_url": "https://ssl.reddit.com/api/v1/access_token",
+			"access_token_authentication": "basic"
+		},
+
+		"TeamViewer":
+		{
+			"oauth_version": "2.0",
+			"dialog_url": "https://webapi.teamviewer.com/api/v1/oauth2/authorize?client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&response_type=code&state={STATE}&api_key={API_KEY}&scope={SCOPE}",
+			"access_token_url": "https://webapi.teamviewer.com/api/v1/oauth2/token"
+		},
+
+		"Twitter2":
+		{
+			"oauth_version": "2.0",
+			"dialog_url": "use Twitter OAuth 1.0a for accessing its API on behalf of a given user",
+			"access_token_url": "https://api.twitter.com/oauth2/token"
+		},
+
+		"Vimeo":
+		{
+			"oauth_version": "2.0",
+			"dialog_url": "https://api.vimeo.com/oauth/authorize?client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&response_type=code&state={STATE}&scope={SCOPE}",
+			"access_token_url": "https://api.vimeo.com/oauth/access_token"
+		}
+	}
+}
