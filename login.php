@@ -1,6 +1,6 @@
 <?php
 require("Includes/db.php");
-$_SESSION['userid'] = "1";
+//$_SESSION['userid'] = "1"; //Bypass Login
 
 if(isset($_POST['username'], $_POST['password'])){	
 	$username = mysqli_escape_string($db, clean(strip_tags($_POST['username'])));
@@ -12,7 +12,7 @@ if(isset($_POST['username'], $_POST['password'])){
 	$data = mysqli_fetch_assoc($results);
 	$dbPassword = crypto('decrypt', $data['password'], $data['hex']);
 	
-	if($password!==$dbPassword or $dbPassword==""){
+	if($password!==$dbPassword || $dbPassword==""){
 		$count = 0;
 	}
 
@@ -23,9 +23,13 @@ if(isset($_POST['username'], $_POST['password'])){
 		$_SESSION['username'] = $data['username'];
 		$_SESSION['showModal'] = "true";
 		$_SESSION['recent'] = explode(",",$data['recents']);
-		if($data['recents']==""){ $_SESSION['recent'] = array(); }
+		if($data['recents']==""){ 
+			$_SESSION['recent'] = array(); 
+		}
 		$_SESSION['recentedit'] = explode(",",$data['recentedit']);
-		if($data['recentedit']==""){ $_SESSION['recentedit'] = array(); }
+		if($data['recentedit']==""){ 
+			$_SESSION['recentedit'] = array();
+		}
 		header("location: index.php");
 	}else{
 		$message = " <span style='color:red'>Incorrect Login Info.</span>";
@@ -91,7 +95,7 @@ if($_SESSION['userid']!=""){
 			 </div>
 		  </div>
 		 </div>
-		  <footer style="z-index:999;padding:5px;height:30px;position: fixed;left: 0;bottom: 0;width: 100%;color:#fff;text-align: center;background:<?php echo $siteSettings['theme']['Color 1'];?>;" class="page-footer font-small black">
+		  <footer style="z-index:999;padding:5px;height:30px;position:fixed;left:0;bottom:0;width:100%;color:#fff;text-align:center;background:<?php echo $siteSettings['theme']['Color 1'];?>;" class="page-footer font-small black">
 				<div class="footer-copyright text-center ">© <?php echo date('Y');?> Copyright
 					<a style="color:#fff;" href="#"> Open-RMM</a>
 				</div>

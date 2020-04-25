@@ -1,5 +1,6 @@
 <?php
 	require("Includes/db.php");
+	
 	$search = strip_tags(urldecode($_GET['search']));
 	$limit = intval(base64_decode($_GET['l']));
 	$query = "SELECT username,nicename FROM users WHERE ID='".$_SESSION['userid']."' LIMIT 1";
@@ -252,6 +253,7 @@
 			exit(file_get_contents("Includes/config.php"));
 		}
 
+		//Save Site Settings
 		if($_POST['type'] == "saveSiteSettings"){
 			$settings = "$siteSettingsJson = '".trim($_POST['settings'])."';";
 			$configFile = "Includes/config.php";
@@ -1098,6 +1100,7 @@
 			});
 		}
 		
+		//Send CMD Command to agent
 		function sendCommand(command, args, prompt, expire_after=5){
 			if(confirm("Are you sure you would like to "+prompt+"?")){
 				$.post("index.php", {
@@ -1114,6 +1117,8 @@
 				});
 			}
 		}
+		
+		//Toggle ?
 		function toggle(source) {
 		  checkboxes = document.getElementsByName('computers[]');
 		  for(var i=0, n=checkboxes.length;i<n;i++) {
