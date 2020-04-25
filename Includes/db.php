@@ -250,7 +250,7 @@
 	if($nologin==false){
 		if($_SESSION['userid']=="" && basename($_SERVER['REQUEST_URI']) != "login.php" && !in_array(basename($_SERVER['SCRIPT_NAME']), $serverPages)){
 			if(strpos(strtolower($_SERVER['SCRIPT_NAME']),"/ajax/")!==false){ //fix for ajax pages
-				echo ("<center><h3>Error loading page, please make you are loged in.</h3></center>");
+				echo "<center><h3>Error loading page, please make you are loged in.</h3></center>";
 				exit("<script>location.href='index.php';</script>");
 			}else{
 				echo "Redirecting You To The Login Page...";

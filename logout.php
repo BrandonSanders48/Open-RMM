@@ -3,6 +3,14 @@
 	unset($_SESSION['userid']);
 	session_unset();
 	session_destroy();
-	header("Location: login.php");
-	exit("Redirecting");
-?>Logging you out securely...
+	sleep(1);
+	
+	if(isset($_SESSION['userid'])){
+		exit("We had trouble logging you out... it's our fault not yours.");
+	}else{
+		header("Location: login.php");
+		exit("Logging you out securely...");
+	}
+	
+	
+
