@@ -155,6 +155,3 @@
 		$(".loadSection").load("ajax/"+page+".php?limit="+limit+"&search="+encodeURI(text)+"&ID="+ID+"&filters="+encodeURI(filters));
 	}
 </script>
-
-<!--- Brad was Here --->
-<!--brandon was here -->
