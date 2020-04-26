@@ -1,6 +1,6 @@
 <?php
 	include("../Includes/db.php");
-	
+
 	$query = "SELECT CompanyID,name,phone,email,address,comments,active FROM companies WHERE CompanyID<>'1' ORDER BY active,name ASC";
 	$results = mysqli_query($db, $query);
 	$companyCount = mysqli_num_rows($results);
@@ -12,9 +12,9 @@
 		<i class="fas fa-sync"></i>
 	</a>
 	<button type="button" style="margin:5px;background:<?php echo $siteSettings['theme']['Color 1'];?>;color:#fff;" data-toggle="modal" data-target="#companyModal" class="btn-sm btn btn-light" title="Add User">
-		<i class="fas fa-plus"></i> Add Company 
+		<i class="fas fa-plus"></i> Add Company
 	</button>
-</div>	
+</div>
 
 <hr/>
   <div style="overflow:auto;width:100%;">
@@ -45,11 +45,11 @@
 			while($company = mysqli_fetch_assoc($results)){
 				$computersWithAlerts = 0;
 				$aggrigateAlerts = "";
-				
+
 				$query = "SELECT hostname FROM computerdata WHERE CompanyID='".$company['CompanyID']."'";
 				$computerResults = mysqli_query($db, $query);
 				$computerCount = mysqli_num_rows($computerResults);
-				
+
 				while($computerData = mysqli_fetch_assoc($computerResults)){
 					$getWMI = array("WMI_LogicalDisk", "WMI_OS", "WMI_ComputerSystem");
 					$data = getComputerData($computerData['hostname'], $getWMI);
@@ -72,7 +72,7 @@
 			  <td>
 				<?php if($computersWithAlerts > 0){?>
 					<a href="#" class="text-danger" data-toggle="modal" data-target="#computerAlerts" onclick="computerAlertsModal('<?php echo $company['name'];?>','<?php echo $aggrigateAlerts;?>', true);">
-						<i title="Priority" class="text-danger fa fa-exclamation-triangle" aria-hidden="true"></i> 
+						<i title="Priority" class="text-danger fa fa-exclamation-triangle" aria-hidden="true"></i>
 						<?php echo $computersWithAlerts;?> <?php echo ($computersWithAlerts > 1 ? "computers" : "computer");?>
 					</a>
 				<?php }else{?>
@@ -102,7 +102,7 @@
 						<?php if($company['active']=="1"){ ?>
 							<input type="hidden" name="active" value="0"/>
 							<button type="submit" title="Remove Company" style="border:none;" class="btn btn-danger btn-sm">
-								<i class="fas fa-trash"></i>				
+								<i class="fas fa-trash"></i>
 							</button>
 						<?php }else{ ?>
 							<input type="hidden" name="active" value="1"/>
@@ -110,7 +110,7 @@
 								<i class="fas fa-plus"></i>
 							</button>
 						<?php }?>
-						
+
 						<a href="#" data-toggle="modal" data-target="#companyModal" onclick="editCompany('<?php echo $company['CompanyID'];?>','<?php echo $company['name'];?>','<?php echo $company['address'];?>','<?php echo phone($company['phone']);?>','<?php echo ucfirst($company['email']);?>','<?php echo ucfirst($company['comments']);?>')" title="Edit Company" style="border:none;" class="btn btn-dark btn-sm">
 							<i class="fas fa-pencil-alt"></i>
 						</a>
@@ -127,11 +127,11 @@
 						<button type="submit" title="Update Company Agent" style="border:none;" class="btn btn-dark btn-sm">
 							<i class="fas fa-cloud-upload-alt"></i>
 						</button>
-					</form>				
+					</form>
 				</td>
 			</tr>
 		<?php }?>
-		<?php if($companyCount == 0){?> 
+		<?php if($companyCount == 0){?>
 			<tr>
 				<td colspan="8"><center><h4>No companies</h4></center></td>
 			</tr>
@@ -149,10 +149,12 @@
 		$("#editCompanyModal_email").val(email);
 		$("#editCompanyModal_comments").val(comments);
 	}
-	
+
 	function searchItem(text, page="Dashboard", ID=0, filters="", limit=25){
 		$(".loadSection").html("<center><h3 style='margin-top:40px;'><i class='fas fa-spinner fa-spin'></i> Loading "+text+"</h3></center>");
 		$(".loadSection").load("ajax/"+page+".php?limit="+limit+"&search="+encodeURI(text)+"&ID="+ID+"&filters="+encodeURI(filters));
 	}
 </script>
+
 <!--- Brad was Here --->
+<!--brandon was here -->
