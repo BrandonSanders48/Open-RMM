@@ -1,6 +1,6 @@
 <?php
 	include("../Includes/db.php");
-	
+
 	$computerID = (int)$_GET['ID'];
 	$query = "SELECT ID, show_alerts, teamviewer,hostname, CompanyID, phone, email, name, comment,computerType FROM computerdata WHERE ID='".$computerID."' LIMIT 1";
 	$results = mysqli_query($db, $query);
@@ -84,7 +84,7 @@
 				<div style="margin-top:30px;" class="form-group float-label-control">
 					<input style="background:<?php echo $siteSettings['theme']['Color 4']; ?>;color:#fff" type="submit" class="form-control" value="Save Details">
 				</div>
-			
+
 		</div>
 		 <div class="col-sm-4">
 			<div class="panel panel-default" style="height:auto;color:#fff;background:<?php echo $siteSettings['theme']['Color 1']; ?>;color#000;padding:20px;border-radius:6px;margin-bottom:20px;">
@@ -188,13 +188,3 @@
 	</div>
   </div>
 </div>
-<script>
-    tinymce.init({
-      selector: 'textarea',
-      plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments',
-      toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
-      toolbar_mode: 'floating',
-      tinycomments_mode: 'embedded',
-      tinycomments_author: 'Open-RMM',
-    });
-</script>

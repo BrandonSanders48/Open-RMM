@@ -331,7 +331,6 @@
 		<!--- Font Awesome --->
 		<link rel="stylesheet" href="css/all.min.css"/>
 		<script src="js/all.min.js"></script>
-		<script src="https://cdn.tiny.cloud/1/kdsnrszwoxdwc9f80ckwo8skp7ltlz1io93n9l8a9j2hrkvb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script><!--- REMOVE CDN, KEEP LOCAL! -->
 		<!-- jquery-->
 		<script src="js/tagsinput.js"></script>
 		<script src="js/jquery.js"></script>
