@@ -131,7 +131,7 @@
 				</td>
 			</tr>
 		<?php }?>
-		<?php if($companyCount == 0){?>
+		<?php if($companyCount == 0){?> 
 			<tr>
 				<td colspan="8"><center><h4>No companies</h4></center></td>
 			</tr>
