@@ -1,13 +1,13 @@
 <?php
 	require("Includes/db.php");
-	
+
 	$search = strip_tags(urldecode($_GET['search']));
 	$limit = intval(base64_decode($_GET['l']));
 	$query = "SELECT username,nicename FROM users WHERE ID='".$_SESSION['userid']."' LIMIT 1";
 	$results = mysqli_query($db, $query);
 	$user = mysqli_fetch_assoc($results);
 	$username = $user['username'];
-	
+
 	if(isset($_POST)){
 		//Edit Computer (Edit.php)
 		if($_POST['type'] == "EditComputer"){
@@ -19,8 +19,8 @@
 			$type = clean($_POST['PctType']);
 			$email = strip_tags($_POST['email']);
 			$TeamID = (int)$_POST['TeamID'];
-			$show_alerts = (int)$_POST['ShowAlerts']; 
-			
+			$show_alerts = (int)$_POST['ShowAlerts'];
+
 			//Edit Recents
 			$query = "UPDATE users SET recentedit='".implode(",", $_SESSION['recentedit'])."' WHERE ID=".$_SESSION['userid'].";";
 			if (in_array($ID, $_SESSION['recentedit'])){
@@ -39,7 +39,7 @@
 			$query = "UPDATE computerdata SET show_alerts='".$show_alerts."', teamviewer='".$TeamID."', computerType='".$type."', comment='".$comment."', name='".$name."', phone='".$phone."', CompanyID='".$company."', email='".$email."' WHERE ID='".$ID."';";
 			$results = mysqli_query($db, $query);
 		}
-		
+
 		//Delete computer modal on edit.php
 		if($_POST['type'] == "DeleteComputer"){
 			$ID = (int)$_POST['ID'];
@@ -52,7 +52,7 @@
 				header("location: index.php");
 			}
 		}
-		
+
 		//Add Computers To Company
 		if($_POST['type'] == "CompanyComputers"){
 			$computers = $_POST['computers'];
@@ -64,7 +64,7 @@
 			}
 			header("location: index.php");
 		}
-		
+
 		//Add Edit/User
 		if($_POST['type'] == "AddEditUser"){
 			if(isset($_POST['username'])){
@@ -99,7 +99,7 @@
 				}
 			}
 		}
-		
+
 		//Add Edit/Company
 		if($_POST['type'] == "AddEditCompany"){
 			if(isset($_POST['name'], $_POST['phone'], $_POST['address'], $_POST['email'])){
@@ -120,7 +120,7 @@
 				header("location: index.php?page=AllCompanies");
 			}
 		}
-		
+
 		//Delete Company
 		if($_POST['type'] == "DeleteCompany"){
 			$ID = (int)$_POST['ID'];
@@ -129,7 +129,7 @@
 			$results = mysqli_query($db, $query);
 			header("location: index.php?page=AllCompanies");
 		}
-		
+
 		//Delete User
 		if($_POST['type'] == "DeleteUser"){
 			$ID = (int)$_POST['ID'];
@@ -138,7 +138,7 @@
 			$results = mysqli_query($db, $query);
 			header("location: index.php?page=AllUsers");
 		}
-		
+
 		//Delete Command
 		if($_POST['type'] == "CompanyUpdateAll"){
 			$ID = $_POST['ID'];
@@ -147,7 +147,7 @@
 			$results = mysqli_query($db, $query);
 			header("location: index.php?page=AllCompanies");
 		}
-		
+
 		//Create Note
 		if(isset($_POST['note'])){
 			$newnote = clean($_POST['note']);
@@ -159,7 +159,7 @@
 			$results = mysqli_query($db, $query);
 			header("location: index.php");
 		}
-		
+
 		//Commands
 		if($_POST['type'] == "SendCommand"){
 			$ID = (int)$_POST['ID'];
@@ -189,7 +189,7 @@
 			}
 			header("location: index.php?page=General");
 		}
-		
+
 		//Update Company Agents
 		if($_POST['type'] == "CompanyUpdateAll"){
 			$ID = (int)$_POST['CompanyID'];
@@ -217,7 +217,7 @@
 				}
 			}
 		}
-		
+
 		//Alert Config Modal
 		if($_POST['type'] == "AlertSettings"){
 			$alert_settings = "";
@@ -242,14 +242,14 @@
 				echo '<script>window.onload = function() { pageAlert("Alert Settings", "Alert Settings Saved Successfully","Success"); };</script>';
 			}
 		}
-		
+
 		//Delete Version
 		if(isset($_POST['version'])){
 			$version = clean($_POST['version']);
 			unlink("downloads/".$version);
 			header("location: index.php?page=Versions");
 		}
-	
+
 		//Get Site Settings
 		if($_POST['type'] == "getSiteSettings"){
 			exit(file_get_contents("Includes/config.php"));
@@ -262,7 +262,7 @@
 			file_put_contents($configFile, $settings);
 			exit();
 		}
-	
+
 		//Upload or download new agent file
 		if(isset($_POST['agentFile']) or isset($_POST['companyAgent'])){
 			$agentVersion = clean($_POST['agentVersion']);
@@ -311,12 +311,12 @@
 	$query = "SELECT CompanyID FROM companies where active='1'";
 	$results = mysqli_query($db, $query);
 	$companyCount = mysqli_num_rows($results);
-	
+
 	//Get active user count
 	$query = "SELECT ID FROM users where active='1'";
 	$results = mysqli_query($db, $query);
 	$userCount = mysqli_num_rows($results);
-	
+
 	//Get active computer count
 	$query = "SELECT ID FROM computerdata where active='1'";
 	$results = mysqli_query($db, $query);
@@ -522,7 +522,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!-------------------------------MODALS------------------------------------>
 		<!--------------- Configure Alerts Modal ------------->
 		<div id="alertModal" class="modal fade" role="dialog">
@@ -616,7 +616,7 @@
 			</div>
 		  </div>
 		</div>
-		
+
 		<!--------------- User Modal ------------->
 		<div id="userModal" class="modal fade" role="dialog">
 		  <div class="modal-dialog">
@@ -658,7 +658,7 @@
 			</div>
 		  </div>
 		</div>
-		
+
 		<!--------------- Version Modal ------------->
 		<div id="versionModal" class="modal fade" role="dialog">
 		  <div class="modal-dialog">
@@ -681,7 +681,7 @@
 			</div>
 		  </div>
 		</div>
-		
+
 		<!--------------- Version Modal ------------->
 		<div id="noteModal" class="modal fade" role="dialog">
 		  <div class="modal-dialog">
@@ -704,7 +704,7 @@
 			</div>
 		  </div>
 		</div>
-		
+
 		<!---------- Company Modal ------------>
 		<div id="companyModal" class="modal fade" role="dialog">
 		  <div class="modal-dialog">
@@ -730,7 +730,7 @@
 						<input placeholder="Email" type="email" name="email" class="form-control" id="editCompanyModal_email"/>
 					</div>
 					<div class="form-group">
-						<textarea placeholder="Additional Info" style="resize:vertical;" name="comments" 
+						<textarea placeholder="Additional Info" style="resize:vertical;" name="comments"
 							class="form-control" placeholder="Optional" id="editCompanyModal_comments"></textarea>
 					</div>
 				  </div>
@@ -744,7 +744,7 @@
 			</div>
 		  </div>
 		</div>
-		
+
 		<!----------- Terminal ---------------->
 		<div id="terminalModal" class="modal fade" role="dialog">
 		  <div class="modal-dialog modal-lg">
@@ -767,7 +767,7 @@
 			</div>
 		  </div>
 		</div>
-		
+
 		<!------------- Alerts ------------------->
 		<div id="confirm" class="modal fade" role="dialog">
 		  <div class="modal-dialog modal-lg">
@@ -787,7 +787,7 @@
 			</div>
 		  </div>
 		</div>
-		
+
 		<!------------- Alerts ------------------->
 		<div id="computerAlerts" class="modal fade" role="dialog">
 		  <div class="modal-dialog modal-lg">
@@ -806,7 +806,7 @@
 			</div>
 		  </div>
 		</div>
-		
+
 		<!------------- Page Errors ------------------->
 		<div id="pageAlert" class="modal fade" role="dialog">
 		  <div class="modal-dialog">
@@ -824,7 +824,7 @@
 			</div>
 		  </div>
 		</div>
-		
+
 		<!------------- Historical ------------------->
 		<div id="historicalData_modal" class="modal fade" role="dialog">
 		  <div class="modal-dialog">
@@ -843,7 +843,7 @@
 			</div>
 		  </div>
 		</div>
-		
+
 		<!------------- Historical Date Selection  ------------------->
 		<div id="historicalDateSelection_modal" class="modal fade" role="dialog">
 		  <div class="modal-dialog">
@@ -883,7 +883,7 @@
 			</div>
 		  </div>
 		</div>
-		
+
 		<!------------- Actions ------------------->
 		<div id="actionsModal" class="modal fade" role="dialog">
 		  <div class="modal-dialog modal-md">
@@ -925,7 +925,7 @@
 			</div>
 		  </div>
 		</div>
-		
+
 		<!------------- Upload .exe File ------------------->
 		<div id="agentUpload" class="modal fade" role="dialog">
 		  <div class="modal-dialog modal-lg">
@@ -961,7 +961,7 @@
 		</div>
 		<!---------------------------------End MODALS------------------------------------->
 	</body>
-	
+
 	<script src="js/extra.js"></script>
 	<script>
 		//Load Page
@@ -971,7 +971,7 @@
 		var computerID = getCookie("ID");
 		var currentSection = getCookie("section");
 		var sectionHistoryDate = "latest";
-		
+
 		//Load Pages
 		function loadSection(section=currentSection, ID=computerID, date=sectionHistoryDate){
 			document.cookie = "section=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -983,7 +983,7 @@
 			$(".loadSection").html("<center><h3 style='margin-top:40px;'><i class='fas fa-spinner fa-spin'></i> Loading</h3></center>");
 			$(".loadSection").load("ajax/"+section+".php?ID="+ID+"&Date="+date);
 			$(".secbtn").css({"background-color":"#e6e7e8", "color":"#000"});
-			
+
 			$("#secbtn"+section).css({"background-color":"<?php echo $siteSettings['theme']['Color 1'];?>","color":"#fff"});
 			$(".recents").load("ajax/recent.php?ID="+ID);
 			if(section == "Dashboard" || section == "AllUsers" || section == "AllCompanies" || section == "NewComputers" || section == "Versions" || section == "SiteSettings"){
@@ -995,7 +995,7 @@
 				$('#sidebar').removeClass('active');
 			}
 		}
-		
+
 		//Load historical section, Network, Programs...
 		function loadSectionHistory(date="latest"){
 			sectionHistoryDate = date;
@@ -1003,20 +1003,20 @@
 			$(".loadSection").load("ajax/"+currentSection+".php?ID="+computerID+"&Date="+date);
 			$("#historicalDateSelection_modal").modal("hide");
 		}
-		
+
 		<?php if($_GET['page']==""){ ?>
 			loadSection(currentSection, computerID);
 		<?php }else{ ?>
 			loadSection("<?php echo ucfirst($_GET['page']);?>", "<?php echo (int)$_GET['ID'];?>");
 		<?php }?>
-		
+
 		//Sidebar
 		$(document).ready(function () {
 			$('.sidebarCollapse').on('click', function () {
 				$('#sidebar').toggleClass('active');
 			});
 		});
-		
+
 		//Search
 		function search(text, page="Dashboard", ID=0, filters="", limit=25){
 			$('body').removeClass('modal-open');
@@ -1024,7 +1024,7 @@
 			$(".loadSection").html("<center><h3 style='margin-top:40px;'><i class='fas fa-spinner fa-spin'></i> Loading Results</h3></center>");
 			$(".loadSection").load("ajax/"+page+".php?limit="+limit+"&search="+encodeURI(text)+"&ID="+ID+"&filters="+encodeURI(filters)+"&Date="+sectionHistoryDate);
 		}
-		
+
 		//Terminal
 		$('#terminaltxt').keypress(function(event){
 			var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -1039,7 +1039,7 @@
 				});
 			}
 		});
-		
+
 		//Alerts Modal
 		function computerAlertsModal(title, delimited='none', showHostname = false){
 			$("#computerAlertsHostname").html("<b>Alerts for "+title+"</b>");
@@ -1061,7 +1061,7 @@
 				$("#computerAlertsModalList").html($("#computerAlertsModalList").html() + "<div class='calert alert alert-"+alertData[2]+"' role='alert'><b><i class='fas fa-exclamation-triangle text-"+alertData[2]+"'></i> "+ hostname + " " + alertData[0]+"</b> - " + alertData[1] + "</div>");
 			}
 		}
-		
+
 		//Random password
 		function randomPassword(length) {
 			var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
@@ -1072,14 +1072,14 @@
 			}
 			return pass;
 		}
-		
+
 		//Set random passwords to inputs
 		function generate() {
 			var pass = randomPassword(8);
 			$('#editUserModal_password').prop('type', 'text').val(pass);
 			$('#editUserModal_password2').prop('type', 'text').val(pass);
 		}
-		
+
 		//Page Alerts, replaces alert()
 		function pageAlert(title, message, type="Default"){
 			var types = {Default:"alert-primary", Success:"alert-success", Warning:"alert-warning", Danger:"alert-danger"};
@@ -1091,7 +1091,7 @@
 			$("#pageAlert_title").text(title);
 			$("#pageAlert_message").html(message);
 		}
-		
+
 		//Load Historical Data
 		function loadHistoricalData(hostname, type){
 			$("#historicalData").html("<center><h3 style='margin-top:40px;'><i class='fas fa-spinner fa-spin'></i></h3></center>");
@@ -1104,7 +1104,7 @@
 			  $("#historicalData").html(data);
 			});
 		}
-		
+
 		//Send CMD Command to agent
 		function sendCommand(command, args, prompt, expire_after=5){
 			if(confirm("Are you sure you would like to "+prompt+"?")){
@@ -1122,7 +1122,7 @@
 				});
 			}
 		}
-		
+
 		//Toggle ?
 		function toggle(source) {
 		  checkboxes = document.getElementsByName('computers[]');
