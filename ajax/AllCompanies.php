@@ -42,7 +42,9 @@
 	  <tbody>
 		<?php
 			//Fetch Results
+			$count = 0;
 			while($company = mysqli_fetch_assoc($results)){
+				$count++;
 				$computersWithAlerts = 0;
 				$aggrigateAlerts = "";
 				
@@ -129,6 +131,11 @@
 						</button>
 					</form>				
 				</td>
+			</tr>
+		<?php }?>
+		<?php if($count == 0){?>
+			<tr>
+				<td colspan="8"><center><h4>No companies</h4></center></td>
 			</tr>
 		<?php }?>
 	   </tbody>
