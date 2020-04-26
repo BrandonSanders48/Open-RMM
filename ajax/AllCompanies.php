@@ -156,5 +156,3 @@
 	}
 </script>
 
-<!--- Brad was Here --->
-<!--brandon was here -->
