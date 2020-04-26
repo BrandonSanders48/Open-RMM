@@ -1,7 +1,7 @@
 <?php
 	include("../Includes/db.php");
 	
-	$query = "SELECT CompanyID,name,phone,email,address,comments,active FROM companies where CompanyID<>'1' ORDER BY active,name ASC";
+	$query = "SELECT CompanyID,name,phone,email,address,comments,active FROM companies WHERE CompanyID<>'1' ORDER BY active,name ASC";
 	$results = mysqli_query($db, $query);
 	$companyCount = mysqli_num_rows($results);
 ?>
@@ -42,9 +42,7 @@
 	  <tbody>
 		<?php
 			//Fetch Results
-			$count = 0;
 			while($company = mysqli_fetch_assoc($results)){
-				$count++;
 				$computersWithAlerts = 0;
 				$aggrigateAlerts = "";
 				
@@ -55,7 +53,7 @@
 				while($computerData = mysqli_fetch_assoc($computerResults)){
 					$getWMI = array("WMI_LogicalDisk", "WMI_OS", "WMI_ComputerSystem");
 					$data = getComputerData($computerData['hostname'], $getWMI);
-					if(count($data['Alerts'])>0){
+					if(count($data['Alerts']) > 0){
 						$computersWithAlerts++;
 						$aggrigateAlerts .= $data['Alerts_raw'].",";
 					}
@@ -133,7 +131,7 @@
 				</td>
 			</tr>
 		<?php }?>
-		<?php if($count == 0){?>
+		<?php if($companyCount == 0){?>
 			<tr>
 				<td colspan="8"><center><h4>No companies</h4></center></td>
 			</tr>
