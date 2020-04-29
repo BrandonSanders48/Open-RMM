@@ -18,8 +18,14 @@
 	########################################### Connect To Database ##############################################
 	##############################################################################################################
 	$db = mysqli_connect($siteSettings['MySQL']['host'], $siteSettings['MySQL']['username'], $siteSettings['MySQL']['password'], $siteSettings['MySQL']['database']);
-	if(!$db){
-		exit("<center><h1 style='color:red;'>Error Connecting To Database</h1></center>");
+	if(!$db){ //Produce HTML Error
+		echo "<center>";
+		echo "<div style='font-family:Arial;font-size:20px;'>";
+		echo "<h1>Open-RMM</h1>";
+		echo "<h2 style='color:red;'>Error establishing a database connection.</h2>";
+		echo "<p> This issue can be caused by incorrect database information in your config.php file, corrupt database, or an irresponsive database server.</p>";
+		echo "</div>";
+		exit("</center>");
 	}
 	
 	##############################################################################################################
