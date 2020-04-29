@@ -7,6 +7,11 @@ $siteSettingsJson = '
         "password": "Password",
         "database": "rmm"
     },
+	"general": {
+		"Timezone": "America/Chicago"
+		"Crypto_salt":"R1pxNEU1aXBBc21rWW5GQ3dVdrQ1F4cUVabGppTk9aWXEzdE1ZRQ==",
+		"Crypto_key":"J1HX1VuMWlEtSXQzZCE="
+	},
     "theme": {
         "Color 1": "#2d364b",
         "Color 2": "#01452c",
@@ -191,4 +196,3 @@ $siteSettingsJson = '
         }	
     }
 }';
- 

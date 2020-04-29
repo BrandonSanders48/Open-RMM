@@ -4,7 +4,7 @@
 	$siteSettings = json_decode($siteSettingsJson, true);
 	
 	//Set Timezone, need to add this to config.
-	date_default_timezone_set("America/Chicago");
+	date_default_timezone_set($siteSettings['general']['Timezone']);
 	$serverPages = array("cron.php", "LoadHistorical.php");
 	
 	//Only do this if login is required
@@ -14,10 +14,28 @@
 		SESSION_START();
 	}
 	
-	//Connect to DB
+	##############################################################################################################
+	########################################### Connect To Database ##############################################
+	##############################################################################################################
 	$db = mysqli_connect($siteSettings['MySQL']['host'], $siteSettings['MySQL']['username'], $siteSettings['MySQL']['password'], $siteSettings['MySQL']['database']);
 	if(!$db){
 		exit("<center><h1 style='color:red;'>Error Connecting To Database</h1></center>");
+	}
+	
+	##############################################################################################################
+	############################################ Verifiy Logged In ###############################################
+	##############################################################################################################
+	if($nologin == false){
+		if($_SESSION['userid']=="" && basename($_SERVER['REQUEST_URI']) != "login.php" && !in_array(basename($_SERVER['SCRIPT_NAME']), $serverPages)){
+			if(strpos(strtolower($_SERVER['SCRIPT_NAME']),"/ajax/")!==false){ //fix for ajax pages
+				echo "<center><h3>Error loading page, please make sure you are logged in.</h3></center>";
+				exit("<script>location.href='index.php';</script>");
+			}else{
+				echo "Redirecting you to the login page...";
+				header("location: login.php");
+				exit;
+			}
+		}
 	}
 	
 	//Load general settings from DB
@@ -28,12 +46,15 @@
 		$general = mysqli_fetch_assoc($results);
 		return $general;
 	}
-	$siteSettings['general'] = loadGeneralFromDB();
+	array_push($siteSettings['general'], loadGeneralFromDB());
 	
-	//Function to aggrigate data from pc
+	##########################################################################################################
+	###################################### Get PC Data From Database #########################################
+	##########################################################################################################
 	function getComputerData($hostname, $fields = array("*"), $date = "latest"){
 		global $db, $siteSettings;
 		$retResult = array();
+		
 		if(in_array("*", $fields)){
 			$query = "SELECT WMI_Name, WMI_Data, last_update FROM wmidata WHERE Hostname='".$hostname."'";
 		}else{
@@ -78,7 +99,9 @@
 		return $retResult;
 	}
 	
-	//Alerts
+	##########################################################################################################
+	############################################## PC Alerts #################################################
+	##########################################################################################################
 	function getComputerAlerts($hostname, $json){
 		global $siteSettings;
 		$alertArray = array();
@@ -194,7 +217,11 @@
 		}
 		return array($alertArray, trim($alertDelimited, ","));
 	}
-	
+
+	##########################################################################################################
+	######################################### Core Functions #################################################
+	##########################################################################################################
+
 	//Fix Empty Text
 	function textOnNull($text, $onnull=""){
 		return (trim($text)=="" ? $onnull : $text);
@@ -210,7 +237,7 @@
 	//Clean Phone
 	function phone($number) {
 		if(ctype_digit($number) && strlen($number) == 10) {
-		$number = "(".substr($number, 0, 3) .') '. substr($number, 3, 3) .'-'. substr($number, 6);
+		$number = "(".substr($number, 0, 3) .') '. substr($number, 3, 3).'-'. substr($number, 6);
 		} else {
 			if(ctype_digit($number) && strlen($number) == 7) {
 				$number = substr($number, 0, 3) .'-'. substr($number, 3, 4);
@@ -246,32 +273,18 @@
 		return $string ? implode(', ', $string) . ' ago' : 'just now';
 	}
 	
-	//If Not logged in
-	if($nologin==false){
-		if($_SESSION['userid']=="" && basename($_SERVER['REQUEST_URI']) != "login.php" && !in_array(basename($_SERVER['SCRIPT_NAME']), $serverPages)){
-			if(strpos(strtolower($_SERVER['SCRIPT_NAME']),"/ajax/")!==false){ //fix for ajax pages
-				echo "<center><h3>Error loading page, please make you are loged in.</h3></center>";
-				exit("<script>location.href='index.php';</script>");
-			}else{
-				echo "Redirecting You To The Login Page...";
-				header("location: login.php");
-				exit;
-			}
-		}
-	}
-	
 	//Encrypt And Decrypt With Salt
 	function crypto($action, $string, $salt) {
 		return $string;
 	}
 	
-	/*
-	$salt = base64_decode("R1pxNEU1aXBBc21rWW5GQ3dVdrQ1F4cUVabGppTk9aWXEzdE1ZRQ==");
+	/* Seem to be having issues with this, disabled 4/25/20
+	$salt = base64_decode($siteSettings['general']['Crypto_salt']);
 	function crypto($action, $string, $salt) {
-		
+		global $siteSettings;
 		$output = false;
 		$encrypt_method = "AES-256-CBC";
-		$secret_key = base64_decode('J1HX1VuMWlEtSXQzZCE=');
+		$secret_key = base64_decode($siteSettings['general']['Crypto_key']);
 		$key = hash('sha256', $secret_key);
 		$iv = substr(hash('sha256', $salt), 0, 16);
 		if ($action == 'encrypt') {
@@ -285,7 +298,7 @@
 	*/
 	
 	//Get Random Salt
-	function getSalt($n=40) {
+	function getSalt($n = 40) {
 		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$randomString = '';
 		for ($i = 0; $i < $n; $i++) {
