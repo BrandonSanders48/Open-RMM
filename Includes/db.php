@@ -28,6 +28,9 @@
 			echo "<p> This issue can be caused by incorrect database information in your config.php file, corrupt database, or an irresponsive database server.</p>";
 			echo "</div>";
 			exit("</center>");
+		}else{
+			//Get settings from DB
+			array_push($siteSettings['general'], loadGeneralFromDB());
 		}
 	}
 	
@@ -55,7 +58,6 @@
 		$general = mysqli_fetch_assoc($results);
 		return $general;
 	}
-	array_push($siteSettings['general'], loadGeneralFromDB());
 	
 	##########################################################################################################
 	###################################### Get PC Data From Database #########################################

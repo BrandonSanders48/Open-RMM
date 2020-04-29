@@ -7,39 +7,39 @@ if(isset($_POST['username'], $_POST['password'])){
 	$db = mysqli_connect($siteSettings['MySQL']['host'], $siteSettings['MySQL']['username'], $siteSettings['MySQL']['password'], $siteSettings['MySQL']['database']);
 	if(!$db){ //Unable to login to DB, Show error after attempting to login.
 		$message = " <span style='color:red'>Incorrect Login Info.</span>";
-		break;
-	}
-	
-	$username = mysqli_escape_string($db, clean(strip_tags($_POST['username'])));
-	$password = mysqli_escape_string($db, strip_tags($_POST['password']));
-	
-	$query = "SELECT * FROM users WHERE active='1' AND username='".$username."'";
-	$results= mysqli_query($db, $query);
-	$count = mysqli_num_rows($results);
-	$data = mysqli_fetch_assoc($results);
-	$dbPassword = crypto('decrypt', $data['password'], $data['hex']);
-	
-	if($password !== $dbPassword || $dbPassword == ""){
-		$count = 0;
-	}
-
-	if($count > 0){
-		$query = "UPDATE users SET last_login='".time()."' WHERE ID=".$data['ID'].";";
-		$results = mysqli_query($db, $query);
-		$_SESSION['userid'] = $data['ID'];
-		$_SESSION['username'] = $data['username'];
-		$_SESSION['showModal'] = "true";
-		$_SESSION['recent'] = explode(",", $data['recents']);
-		if($data['recents'] == ""){ 
-			$_SESSION['recent'] = array(); 
-		}
-		$_SESSION['recentedit'] = explode(",", $data['recentedit']);
-		if($data['recentedit'] == ""){ 
-			$_SESSION['recentedit'] = array(); 
-		}
-		header("location: index.php");
 	}else{
-		$message = " <span style='color:red'>Incorrect Login Info.</span>";
+		//Continue Login
+		$username = mysqli_escape_string($db, clean(strip_tags($_POST['username'])));
+		$password = mysqli_escape_string($db, strip_tags($_POST['password']));
+		
+		$query = "SELECT * FROM users WHERE active='1' AND username='".$username."'";
+		$results = mysqli_query($db, $query);
+		$count = mysqli_num_rows($results);
+		$data = mysqli_fetch_assoc($results);
+		$dbPassword = crypto('decrypt', $data['password'], $data['hex']);
+		
+		if($password !== $dbPassword || $dbPassword == ""){
+			$count = 0;
+		}
+
+		if($count > 0){
+			$query = "UPDATE users SET last_login='".time()."' WHERE ID=".$data['ID'].";";
+			$results = mysqli_query($db, $query);
+			$_SESSION['userid'] = $data['ID'];
+			$_SESSION['username'] = $data['username'];
+			$_SESSION['showModal'] = "true";
+			$_SESSION['recent'] = explode(",", $data['recents']);
+			if($data['recents'] == ""){ 
+				$_SESSION['recent'] = array(); 
+			}
+			$_SESSION['recentedit'] = explode(",", $data['recentedit']);
+			if($data['recentedit'] == ""){ 
+				$_SESSION['recentedit'] = array(); 
+			}
+			header("location: index.php");
+		}else{
+			$message = " <span style='color:red'>Incorrect Login Info.</span>";
+		}
 	}
 }
 if($_SESSION['userid'] != ""){ 
