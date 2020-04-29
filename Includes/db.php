@@ -17,22 +17,25 @@
 	##############################################################################################################
 	########################################### Connect To Database ##############################################
 	##############################################################################################################
-	$db = mysqli_connect($siteSettings['MySQL']['host'], $siteSettings['MySQL']['username'], $siteSettings['MySQL']['password'], $siteSettings['MySQL']['database']);
-	if(!$db){ //Produce HTML Error
-		echo "<center>";
-		echo "<div style='font-family:Arial;font-size:20px;'>";
-		echo "<h1>Open-RMM</h1>";
-		echo "<h2 style='color:red;'>Error establishing a database connection.</h2>";
-		echo "<p> This issue can be caused by incorrect database information in your config.php file, corrupt database, or an irresponsive database server.</p>";
-		echo "</div>";
-		exit("</center>");
+	
+	if(strtolower(basename($_SERVER['REQUEST_URI'])) != "login.php"){
+		$db = mysqli_connect($siteSettings['MySQL']['host'], $siteSettings['MySQL']['username'], $siteSettings['MySQL']['password'], $siteSettings['MySQL']['database']);
+		if(!$db){ //Produce HTML Error
+			echo "<center>";
+			echo "<div style='font-family:Arial;font-size:20px;'>";
+			echo "<h1>Open-RMM</h1>";
+			echo "<h2 style='color:red;'>Error establishing a database connection.</h2>";
+			echo "<p> This issue can be caused by incorrect database information in your config.php file, corrupt database, or an irresponsive database server.</p>";
+			echo "</div>";
+			exit("</center>");
+		}
 	}
 	
 	##############################################################################################################
 	############################################ Verifiy Logged In ###############################################
 	##############################################################################################################
 	if($nologin == false){
-		if($_SESSION['userid']=="" && basename($_SERVER['REQUEST_URI']) != "login.php" && !in_array(basename($_SERVER['SCRIPT_NAME']), $serverPages)){
+		if($_SESSION['userid']=="" && strtolower(basename($_SERVER['REQUEST_URI'])) != "login.php" && !in_array(basename($_SERVER['SCRIPT_NAME']), $serverPages)){
 			if(strpos(strtolower($_SERVER['SCRIPT_NAME']),"/ajax/")!==false){ //fix for ajax pages
 				echo "<center><h3>Error loading page, please make sure you are logged in.</h3></center>";
 				exit("<script>location.href='index.php';</script>");
