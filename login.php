@@ -6,7 +6,7 @@ if(isset($_POST['username'], $_POST['password'])){
 	//Connect to DB, this is treated diffrent to always show a nice front end.
 	$db = mysqli_connect($siteSettings['MySQL']['host'], $siteSettings['MySQL']['username'], $siteSettings['MySQL']['password'], $siteSettings['MySQL']['database']);
 	if(!$db){ //Unable to login to DB, Show error after attempting to login.
-		$message = " <span style='color:red'>Incorrect Login Info.</span>";
+		$message = " <span style='color:red'>Error establishing a database connection.</span>";
 	}else{
 		//Continue Login
 		$username = mysqli_escape_string($db, clean(strip_tags($_POST['username'])));
